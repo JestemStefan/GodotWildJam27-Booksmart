@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/2D/icon.png" type="Texture" id=1]
-[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Test_Book/Test_book.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Player2/Player2.tscn" type="PackedScene" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 1 )
@@ -17,6 +16,7 @@ extents = Vector3( 20, 1, 20 )
 [node name="World" type="Spatial"]
 
 [node name="TestPlane" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="TestPlane"]
 mesh = SubResource( 2 )
@@ -26,14 +26,9 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 shape = SubResource( 3 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37472, 0 )
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 10, 7 )
+current = true
 
-[node name="TestBook" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.16935, -10.2913 )
-
-[node name="TestBook2" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65598, -6.43638 )
-
-[node name="TestBook3" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.72393, 1.73028, 0 )
+[node name="Player2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0 )
