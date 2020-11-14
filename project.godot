@@ -26,6 +26,7 @@ config/icon="res://assets/2D/icon.png"
 [autoload]
 
 LevelManager="*res://src/LevelManager/LevelManager.gd"
+FileManager="*res://src/FileManager/FileManager.gd"
 
 [input]
 
