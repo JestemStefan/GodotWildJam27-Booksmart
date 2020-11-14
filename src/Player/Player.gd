@@ -40,7 +40,7 @@ func _input(event):
 		gimbal_x.rotate_y(deg2rad(-event.relative.x * mouse_camera_sensitivity))
 		gimbal_y.rotate_x(deg2rad(-event.relative.y * mouse_camera_sensitivity))
 		
-		gimbal_y.rotation_degrees.x = clamp(gimbal_y.rotation_degrees.x, -70, 70)
+		gimbal_y.rotation_degrees.x = clamp(gimbal_y.rotation_degrees.x, -75, 40)
 
 
 
