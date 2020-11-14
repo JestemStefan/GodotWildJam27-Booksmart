@@ -130,9 +130,9 @@ func process_movement(delta : float) -> void:
 # ------------------------------------------------------------------------------
 # Debug interface stuff
 
-func update_debug_interface() -> void:
+func update_debug_interface():
 	debug_cam_sens_label.text = "Camera Sensitivity : " + str(mouse_camera_sensitivity)
 
-func _on_HSlider_value_changed(value) -> void:
+func _on_HSlider_value_changed(value):
 	mouse_camera_sensitivity = value
 	update_debug_interface()
