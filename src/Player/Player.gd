@@ -26,7 +26,10 @@ var mouse_camera_sensitivity := 0.4
 onready var debug_interface := $DebugInterface
 onready var debug_cam_sens_label := $DebugInterface/VBoxContainer/CamSensitivity/Label
 
-
+# Picking up #
+onready var detect_book_ray: RayCast = $GimbalX/PickBookRay
+onready var detect_book_area : Area = $GimbalX/PickBookArea
+onready var book_storage: Spatial = $GimbalX/BookStorage
 
 
 func _ready() -> void:
@@ -86,6 +89,36 @@ func process_input(_delta : float) -> void:
 				if Input.is_action_pressed("move_jump"):
 					velocity.y = JUMP_SPEED
 			
+			
+			#Picking up books
+			if Input.is_action_just_pressed("interact"): #mapped as E key
+				
+				#if detect_book_ray.is_colliding():
+					#var picked_book: RigidBody = detect_book_ray.get_collider()
+					
+				# get_bodies in layer 3
+				var books = detect_book_area.get_overlapping_bodies() 
+				
+				# if some book can be picked up
+				if books.size() > 0: 
+					var picked_book = books[0]  # pick first book
+					
+					pick_up_book(picked_book)
+					
+				 # no free books detected
+				else:
+					
+					# check if there are any books above head
+					var stored_books = book_storage.get_children()
+					if stored_books.size() > 0:
+						var bottom_book = stored_books[0] # get book from the bottom
+						
+						#TODO Put book on the shelf
+						#book_to_shelf(bottom_book)
+						
+						# Throw a book on the ground if you don't want it?
+						drop_book(bottom_book)
+
 			# ------------------------------------------------------------------
 			# Capture / Free cursor
 			
@@ -136,3 +169,39 @@ func update_debug_interface():
 func _on_HSlider_value_changed(value):
 	mouse_camera_sensitivity = value
 	update_debug_interface()
+
+
+func pick_up_book(book):
+	# change parent of a book to player
+	book.get_parent().remove_child(book)
+	book_storage.add_child(book)
+	
+	# reset translation and rotation
+	book.translation = Vector3.ZERO
+	book.rotation = Vector3.ZERO
+	
+	#pause physics
+	book.set_sleeping(true)
+
+
+func book_to_shelf(book):
+	# TODO
+	pass
+
+
+func drop_book(book):
+	
+	# save location in the global space for spawn
+	var book_position = book.get_global_transform()
+	book_storage.remove_child(book)
+	
+	# spawn in world
+	owner.add_child(book)
+	book.set_global_transform(book_position)
+	
+	# enable physics
+	book.set_sleeping(false)
+	
+	# Throw in correct doirection
+	book.set_linear_velocity(-book_storage.get_global_transform().basis.z * 10 + Vector3(0, 2 ,0) + velocity)
+					
