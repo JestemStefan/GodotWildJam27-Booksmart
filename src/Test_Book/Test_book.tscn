@@ -9,7 +9,9 @@ extents = Vector3( 0.2, 0.8, 0.6 )
 [sub_resource type="CubeMesh" id=3]
 size = Vector3( 0.4, 1.6, 1.2 )
 
-[node name="TestBook" type="RigidBody"]
+[node name="TestBook" type="RigidBody" groups=[
+"Books",
+]]
 collision_layer = 4
 collision_mask = 7
 mass = 10.0
