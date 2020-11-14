@@ -15,7 +15,7 @@ extents = Vector3( 8, 1, 8 )
 [node name="World" type="Spatial"]
 
 [node name="TestPlane" type="StaticBody" parent="."]
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="TestPlane"]
 transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0 )

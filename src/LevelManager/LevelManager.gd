@@ -34,8 +34,8 @@ func load_map_from_raw(data : Array) -> void:
 			var tile_class = Tile.new()
 			
 			tile_class.texture = TILES.get(data_tile.tile).texture
-			tile_class.tile_position = data_tile.position
-			tile_class.translation.y += height
+			tile_class.tile_position = FileManager.str2vec2(data_tile.position)
+			tile_class.height = height
 			
 			match data_tile.tile:
 				TileTypes.DEFAULT: pass
@@ -45,5 +45,6 @@ func load_map_from_raw(data : Array) -> void:
 	emit_signal("level_loaded")
 
 func _ready() -> void:
-	var map_data := []
-	load_map_from_raw(map_data)
+	var a = FileManager.load_from_json("res://levels/level0.json")
+	if get_tree().get_current_scene().name == "World":
+		load_map_from_raw(a)

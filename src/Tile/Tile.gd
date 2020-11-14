@@ -3,6 +3,7 @@ class_name Tile
 
 # General Data #
 var tile_position := Vector2.ZERO
+var height := 0
 var ticks_since_born := 0
 var timer : Timer
 var collision : CollisionShape
@@ -24,6 +25,7 @@ func _ready() -> void:
 	LevelManager.connect("level_loaded", self, "_on_level_load")
 	translation.x = tile_position.x * LevelManager.tile_dimensions.x
 	translation.z = tile_position.y * LevelManager.tile_dimensions.z
+	translation.y = height - 1 * LevelManager.tile_dimensions.y
 
 
 

@@ -1,63 +1,98 @@
 extends Spatial
 
-var occupied_position := []
+onready var level = $Level
+onready var gimbal = $Gimbal
+onready var camera = $Gimbal/Camera
+onready var cursor = $LevelEditorCursor
+onready var zoom_tween = $Tweens/Zoom
+
+var save_file_location := "res://levels/level0.json"
 var data := []
 
-func _process(delta) -> void:
-	if Input.is_action_pressed("r_click"):
-		$MeshInstance.visible = false
-	else:
-		$MeshInstance.visible = true
-	
-	var set_translation = get_3d_mouse_translation()
-	if set_translation:
-		$MeshInstance.translation = set_translation.position
-		$MeshInstance.translation.x = round($MeshInstance.translation.x)
-		$MeshInstance.translation.z = round($MeshInstance.translation.z)
-		$MeshInstance.translation.y = 0
+var camera_direction := Vector2.ZERO
+const CAM_MOVE_SPEED := 6
 
 
 
 func _input(event) -> void:
-	if event is InputEventMouseMotion && Input.is_action_pressed("r_click"):
-		$Spatial.rotate_y(deg2rad(-event.relative.x))
+	
+	# Camera Rotation
+	if event is InputEventMouseMotion && Input.is_action_pressed("m_click"):
+		gimbal.rotate_y(deg2rad(-event.relative.x))
+	
+	# Placing tiles
 	if event.is_action_pressed("l_click"):
-		if not $MeshInstance.translation in occupied_position:
+		
+		# Stacking tiles
+		if get_data_tile_at_pos(cursor.vec2_translation()):
+			var index = get_data_tile_at_pos(cursor.vec2_translation())[0]
+			
+			if data[index].height < 5:
+				data[index].height += 1
+				
+				var tile = Tile.new()
+				tile.texture = "res://assets/2D/wood_texture.png"
+				tile.tile_position = cursor.vec2_translation()
+				tile.height = data[index].height
+				level.add_child(tile)
+		
+		# Tiles on ground
+		else:
 			var tile = Tile.new()
 			tile.texture = "res://assets/2D/wood_texture.png"
-			add_child(tile)
-			tile.translation = $MeshInstance.translation
-			occupied_position.append(tile.translation)
-			var vec2_pos = Vector2.ZERO
-			vec2_pos.x = $MeshInstance.translation.x
-			vec2_pos.y = $MeshInstance.translation.z
-			var values := {
-				"tile": "floor",
-				"position": vec2_pos,
-				"height": 1
-			}
-			data.append(values)
-	if event.is_action_pressed("ui_accept"):
-		write_to_file(data)
-
-
-
-func write_to_file(stuff) -> void:
-	var file = File.new()
-	file.open("res://levels/level0.json", File.WRITE)
-	file.store_string(to_json(stuff))
-	file.close()
-
-
-
-func get_3d_mouse_translation() -> Dictionary:
-	var ray_length = 1000
-	var mouse_pos = get_viewport().get_mouse_position()
-	var camera = $Spatial/Camera
-	var from = camera.project_ray_origin(mouse_pos)
-	var to = from + camera.project_ray_normal(mouse_pos) * ray_length
+			tile.tile_position = cursor.vec2_translation()
+			tile.height = 1
+			level.add_child(tile)
+			
+			data.append({"tile": "floor", "position": cursor.vec2_translation(), "height": 1})
 	
-	var space_state = get_world().get_direct_space_state()
-	# use global coordinates, not local to node
-	var result = space_state.intersect_ray( from, to, [$MeshInstance] )
-	return result
+	cursor.update_position()
+	
+	# Removing tiles
+	if event.is_action_pressed("r_click") && get_data_tile_at_pos(cursor.vec2_translation()):
+		var index = get_data_tile_at_pos(cursor.vec2_translation())[0]
+		if data[index].height > 1:
+			get_tile_at_pos(Vector3(cursor.translation.x, data[index].height - 1, cursor.translation.z)).queue_free()
+			data[index].height -= 1
+		
+		else:
+			get_tile_at_pos(Vector3(cursor.translation.x, data[index].height - 1, cursor.translation.z)).queue_free()
+			for i in get_data_tile_at_pos(cursor.vec2_translation()):
+				if data[i].position == cursor.vec2_translation(): data.remove(i)
+	
+	# Saving
+	if event.is_action_pressed("editor_save"):
+		FileManager.save_to_json(save_file_location, data)
+
+
+
+func _process(delta : float) -> void:
+	camera_movement(delta)
+
+
+
+func camera_movement(delta : float) -> void:
+	camera_direction.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	camera_direction.y = int(Input.is_action_pressed("move_backward")) - int(Input.is_action_pressed("move_forward"))
+	camera_direction = camera_direction.normalized()
+	gimbal.translate(Vector3(camera_direction.x, 0, camera_direction.y) * CAM_MOVE_SPEED * delta)
+
+
+
+func get_data_tile_at_pos(position_to_check : Vector2) -> Array:
+	var indices := []
+	for i in len(data):
+		var tile_data = data[i]
+		if tile_data.position == position_to_check:
+			indices.append(i)
+	return indices
+
+
+
+func get_tile_at_pos(position_to_check : Vector3) -> Tile:
+	for child in level.get_children():
+		if child.translation == position_to_check:
+			return child
+	
+	print("No tile found, returning new tile.")
+	return Tile.new()
