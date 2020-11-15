@@ -101,8 +101,10 @@ func process_input(delta : float) -> void:
 						else:
 							# Throw a book on the ground if you don't want it?
 							drop_book(bottom_book)
-
+				
 				update_book_stack()
+
+
 
 func process_movement(delta : float) -> void:
 	
@@ -142,6 +144,9 @@ func pick_up_book(book):
 	
 	#pause physics MODE_STATIC
 	book.set_mode(1)
+	
+	book.pick_up()
+
 
 
 func book_to_shelf(book, bookshelf):
@@ -157,6 +162,10 @@ func book_to_shelf(book, bookshelf):
 	
 	# pause physics
 	book.set_mode(1)
+	
+	book.place()
+	bookshelf.place_on_shelf(book)
+
 
 
 func drop_book(book):
@@ -174,7 +183,10 @@ func drop_book(book):
 	
 	# Throw in correct doirection
 	book.set_linear_velocity(-book_storage.get_global_transform().basis.z * 10 + Vector3(0, 2 ,0) + velocity)
-								
+	
+	book.throw()
+
+
 
 func update_book_stack():
 	for book in book_storage.get_children():
