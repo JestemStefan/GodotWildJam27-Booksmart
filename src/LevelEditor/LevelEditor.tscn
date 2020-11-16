@@ -7,10 +7,13 @@
 extents = Vector3( 100, 0.5, 100 )
 
 [sub_resource type="SpatialMaterial" id=3]
+flags_no_depth_test = true
 albedo_color = Color( 0.282353, 0.196078, 0.564706, 1 )
 
 [sub_resource type="SphereMesh" id=2]
 material = SubResource( 3 )
+radial_segments = 8
+rings = 8
 
 [node name="LevelEditor" type="Spatial"]
 script = ExtResource( 1 )

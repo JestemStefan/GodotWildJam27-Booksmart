@@ -29,24 +29,12 @@ const TILES := {
 		},
 	"bookshelf_short":
 		{
-			"script": "",
+			"script": "res://src/Tile/TileScripts/Bookshelf.gd",
 			"mesh": "res://models/bookshelf/prop_bookshelf.obj",
 			"texture": "res://models/bookshelf/bookshelf_d.png",
 			"dimensions": Vector3(16, 20, 4)
 		}
 }
-
-
-
-func _init(set_translation : Vector3, tile : String) -> void:
-	var set_dimensions : Vector3 = TILES.get(tile).dimensions
-	var set_mesh_resource : String = TILES.get(tile).mesh
-	var set_mesh_texture : String = TILES.get(tile).texture
-	
-	translation = set_translation
-	dimensions = set_dimensions
-	mesh_texture = set_mesh_texture
-	mesh_resource = set_mesh_resource
 
 
 

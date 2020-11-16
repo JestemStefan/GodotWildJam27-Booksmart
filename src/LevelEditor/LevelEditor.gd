@@ -9,6 +9,7 @@ onready var zoom_tween = $Tweens/Zoom
 var save_file_location := "res://levels/level0.json"
 var data := []
 var tiles := ["floor", "bookshelf_short"]
+var tiles_class := [Tile, ShortBookshelf]
 var selection := 0
 
 var camera_direction := Vector2.ZERO
@@ -84,11 +85,11 @@ func get_tile_at_pos(position_to_check : Vector3) -> Tile:
 
 func place_tile() -> void:
 	var place_pos : Vector3 = cursor.get_translation_safe()
-	if !get_data_tile_at_pos(place_pos):
-		var tile = Tile.new(place_pos, tiles[selection])
+	if !get_tile_at_pos(place_pos) is tiles_class[selection]:
+		var tile = TileManager.create_tile(place_pos, tiles[selection])
 		level.add_child(tile)
 		
-		data.append({"tile": tiles[selection], "position": place_pos, "additionals": tile.additionals})
+		data.append({"tile": tiles[selection], "position": place_pos, "exports": tile.additionals})
 	
 	cursor.update_position()
 
@@ -96,7 +97,7 @@ func place_tile() -> void:
 
 func remove_tile() -> void:
 	var remove_pos : Vector3 = cursor.get_translation_safe()
-	if get_data_tile_at_pos(remove_pos):
+	if get_tile_at_pos(remove_pos) is tiles_class[selection]:
 		var tile = cursor.get_collider()
 		if tile:
 			tile.queue_free()
@@ -111,3 +112,4 @@ func change_tile_selection(amount : int) -> void:
 	selection = wrapi(selection + amount, 0, tiles.size())
 	cursor.size = Tile.TILES.get(tiles[selection]).dimensions
 	cursor.update_position()
+

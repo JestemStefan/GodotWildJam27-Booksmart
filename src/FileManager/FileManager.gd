@@ -18,7 +18,7 @@ func load_from_json(file_path : String): # Uknown return type
 
 
 
-func str2vec2(string : String) -> Vector2:
+func str2vec3(string : String) -> Vector3:
 	var register := ""
 	for character in string:
 		if character in "-0123456789,":
@@ -28,5 +28,6 @@ func str2vec2(string : String) -> Vector2:
 	
 	var x = int(split[0])
 	var y = int(split[1])
+	var z = int(split[2])
 	
-	return Vector2(x, y)
+	return Vector3(x, y, z)

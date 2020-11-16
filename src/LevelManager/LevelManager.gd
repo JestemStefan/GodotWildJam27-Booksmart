@@ -11,7 +11,7 @@ signal level_loaded
 func load_map(data : Array) -> void:
 	
 	for data_tile in data:
-		var tile_class = Tile.new(data_tile.position, data_tile.tile)
+		var tile_class = TileManager.create_tile(FileManager.str2vec3(data_tile.position), data_tile.tile)
 		
 		add_child(tile_class)
 	
@@ -19,6 +19,6 @@ func load_map(data : Array) -> void:
 
 func _ready() -> void:
 	var a = FileManager.load_from_json("res://levels/level0.json")
-	a = [{"tile": "floor", "position": Vector3(0, 0, 0)}]
+	#a = [{"tile": "floor", "position": Vector3(0, 0, 0)}]
 	if get_tree().get_current_scene().name == "World":
 		load_map(a)

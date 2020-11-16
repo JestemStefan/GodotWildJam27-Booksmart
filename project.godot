@@ -9,18 +9,12 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Tile",
-"class": "Bookshelf",
-"language": "GDScript",
-"path": "res://src/Tile/TileScripts/Bookshelf.gd"
-}, {
 "base": "StaticBody",
 "class": "Tile",
 "language": "GDScript",
 "path": "res://src/Tile/Tile.gd"
 } ]
 _global_script_class_icons={
-"Bookshelf": "",
 "Tile": ""
 }
 
@@ -33,6 +27,7 @@ config/icon="res://assets/2D/icon.png"
 
 LevelManager="*res://src/LevelManager/LevelManager.gd"
 FileManager="*res://src/FileManager/FileManager.gd"
+TileManager="*res://src/Tile/TileManager.gd"
 
 [input]
 
