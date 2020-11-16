@@ -8,9 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "RigidBody",
+"class": "Book",
+"language": "GDScript",
+"path": "res://src/Test_Book/Test_book.gd"
+}, {
+"base": "Inventory",
+"class": "Desk",
+"language": "GDScript",
+"path": "res://src/Desk/Desk.gd"
+}, {
+"base": "StaticBody",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://src/Inventory/Inventory.gd"
+} ]
 _global_script_class_icons={
-
+"Book": "",
+"Desk": "",
+"Inventory": ""
 }
 
 [application]

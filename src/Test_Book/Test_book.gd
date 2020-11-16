@@ -1,4 +1,6 @@
 extends RigidBody
+class_name Book
+
 
 
 func pick_up() -> void:
