@@ -4,7 +4,7 @@ export (NodePath) var camera_path
 onready var camera = get_node(camera_path)
 onready var editor = get_parent()
 
-var size := Vector3(16, 35, 8)
+var size := Vector3(1, 1, 1)
 
 
 
@@ -31,6 +31,17 @@ func get_translation_safe() -> Vector3:
 	var fig_1 = translation
 	var fig_2 = Vector3(0, size.y / 2.0, 0)
 	return fig_1 - fig_2
+
+
+
+func get_collider() -> Tile:
+	var result = mouse_raycast()
+	if result:
+		var collider = result.collider
+		if collider is Tile:
+			return collider
+	
+	return null
 
 
 

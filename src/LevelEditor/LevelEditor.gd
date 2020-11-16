@@ -20,7 +20,7 @@ var curr_piece : int = Pieces.TILE
 
 
 func _ready() -> void:
-	change_tile(0)
+	change_tile_selection(0)
 
 
 
@@ -34,30 +34,19 @@ func _input(event) -> void:
 	if event.is_action_pressed("l_click"):
 		place_tile()
 	
-	cursor.update_position()
+	if event.is_action_pressed("r_click"):
+		remove_tile()
 	
-	# Removing tiles
-#	if event.is_action_pressed("r_click") && get_data_tile_at_pos(translation):
-#		var index = get_data_tile_at_pos(cursor.vec2_translation())[0]
-#		if data[index].height > 1:
-#			get_tile_at_pos(Vector3(cursor.translation.x, data[index].height - 1, cursor.translation.z)).queue_free()
-#			data[index].height -= 1
-#
-#		else:
-#			get_tile_at_pos(Vector3(cursor.translation.x, data[index].height - 1, cursor.translation.z)).queue_free()
-#			for i in get_data_tile_at_pos(cursor.vec2_translation()):
-#				if data[i].position == cursor.vec2_translation(): data.remove(i)
-#
 	# Saving
 	if event.is_action_pressed("editor_save"):
 		FileManager.save_to_json(save_file_location, data)
 	
 	# Switching tiles
 	if event.is_action_pressed("next_tile"):
-		change_tile(1)
+		change_tile_selection(1)
 	
 	if event.is_action_pressed("prev_tile"):
-		change_tile(-1)
+		change_tile_selection(-1)
 
 
 
@@ -74,8 +63,8 @@ func camera_movement(delta : float) -> void:
 
 
 
-func get_data_tile_at_pos(position_to_check : Vector3) -> Array:
-	var indices := []
+func get_data_tile_at_pos(position_to_check : Vector3) -> PoolIntArray:
+	var indices : PoolIntArray = []
 	for i in len(data):
 		var tile_data = data[i]
 		if tile_data.position == position_to_check:
@@ -100,10 +89,25 @@ func place_tile() -> void:
 		level.add_child(tile)
 		
 		data.append({"tile": tiles[selection], "position": place_pos, "additionals": tile.additionals})
+	
+	cursor.update_position()
 
 
 
-func change_tile(amount : int) -> void:
-	selection = wrapi(selection + 1, 0, tiles.size())
+func remove_tile() -> void:
+	var remove_pos : Vector3 = cursor.get_translation_safe()
+	if get_data_tile_at_pos(remove_pos):
+		var tile = cursor.get_collider()
+		if tile:
+			tile.queue_free()
+			var index : int = get_data_tile_at_pos(remove_pos)[0]
+			data.remove(index)
+	
+	cursor.update_position()
+
+
+
+func change_tile_selection(amount : int) -> void:
+	selection = wrapi(selection + amount, 0, tiles.size())
 	cursor.size = Tile.TILES.get(tiles[selection]).dimensions
 	cursor.update_position()
