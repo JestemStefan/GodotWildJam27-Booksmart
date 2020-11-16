@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/prop_bookshelf-tall.obj-c19f0047a4b24359f6c9294f755e40fa.mesh"
+
+[deps]
+
+files=[ "res://.import/prop_bookshelf-tall.obj-c19f0047a4b24359f6c9294f755e40fa.mesh" ]
+
+source_file="res://models/bookshelf/prop_bookshelf-tall.obj"
+dest_files=[ "res://.import/prop_bookshelf-tall.obj-c19f0047a4b24359f6c9294f755e40fa.mesh", "res://.import/prop_bookshelf-tall.obj-c19f0047a4b24359f6c9294f755e40fa.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

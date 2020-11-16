@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/floortile_wood.obj-518969f929b2d4e4254ef252da3a5847.mesh"
+
+[deps]
+
+files=[ "res://.import/floortile_wood.obj-518969f929b2d4e4254ef252da3a5847.mesh" ]
+
+source_file="res://models/floortiles/floortile_wood.obj"
+dest_files=[ "res://.import/floortile_wood.obj-518969f929b2d4e4254ef252da3a5847.mesh", "res://.import/floortile_wood.obj-518969f929b2d4e4254ef252da3a5847.mesh" ]
+
+[params]
+
+generate_tangents=false
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

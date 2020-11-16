@@ -4,6 +4,8 @@ export (NodePath) var camera_path
 onready var camera = get_node(camera_path)
 onready var editor = get_parent()
 
+var size := Vector3(16, 35, 8)
+
 
 
 func _input(event) -> void:
@@ -25,18 +27,19 @@ func mouse_raycast() -> Dictionary:
 
 
 
-func vec2_translation() -> Vector2:
-	return Vector2(translation.x, translation.z)
+func get_translation_safe() -> Vector3:
+	var fig_1 = translation
+	var fig_2 = Vector3(0, size.y / 2.0, 0)
+	return fig_1 - fig_2
 
 
 
 func update_position() -> void:
 	var result = mouse_raycast()
 	if result:
-		translation = mouse_raycast().position
-		translation.x = round(translation.x)
-		translation.z = round(translation.z)
-		translation.y = 0
+		scale = size
 		
-		if editor.get_data_tile_at_pos(vec2_translation()):
-			translation.y = 1 * editor.data[editor.get_data_tile_at_pos(vec2_translation())[0]].height
+		translation = mouse_raycast().position
+		translation.x = stepify(translation.x, size.x)
+		translation.z = stepify(translation.z, size.z)
+		translation.y = 0 + size.y / 2.0
