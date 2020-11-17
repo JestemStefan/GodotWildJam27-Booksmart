@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/level_windows-shelf.obj-c8b225f6c3082c02fd16df9c0d8c6223.mesh"
+
+[deps]
+
+files=[ "res://.import/level_windows-shelf.obj-c8b225f6c3082c02fd16df9c0d8c6223.mesh" ]
+
+source_file="res://models/level_misc/level_windows-shelf.obj"
+dest_files=[ "res://.import/level_windows-shelf.obj-c8b225f6c3082c02fd16df9c0d8c6223.mesh", "res://.import/level_windows-shelf.obj-c8b225f6c3082c02fd16df9c0d8c6223.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 0.3, 0.3, 0.3 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

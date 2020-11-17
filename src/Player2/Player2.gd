@@ -16,6 +16,10 @@ var direction := Vector2.ZERO
 # Ladder movement #
 var ladder: StaticBody
 
+# Animations
+onready var anim_player: AnimationPlayer = $char_page/AnimationPlayer
+onready var foot_smoke: Particles = $FootSmoke
+
 # Picking up #
 onready var interact_ray: RayCast = $GimbalX/InteractRay
 onready var interact_area : Area = $GimbalX/InteractionArea
@@ -26,6 +30,7 @@ export var book_capacity: int
 
 func _ready() -> void:
 	state = State.DEFAULT
+	anim_player.play("Idle")
 
 
 
@@ -191,6 +196,15 @@ func process_movement(delta : float) -> void:
 			velocity.y += GRAVITY * delta
 			
 			if is_on_floor():
+				
+				if direction != Vector2.ZERO:
+					anim_player.play("Run")
+					foot_smoke.set_emitting(true)
+				
+				else:''
+					anim_player.play("Idle")
+					foot_smoke.set_emitting(false)
+
 				velocity.x += ACCELERATION * direction.x
 				velocity.z += ACCELERATION * direction.y
 				
