@@ -25,7 +25,7 @@ func _render() -> void:
 
 
 func _item_added(item : Object) -> void:
-	books.add_child(item)
+	books.add_child(item.duplicate())
 
 func _item_erased(item : Object) -> void:
 	books.remove_child(item)

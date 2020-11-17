@@ -63,45 +63,51 @@ func process_input(delta : float) -> void:
 				
 				if interact_ray.is_colliding():
 					var picked_object = interact_ray.get_collider()
-
-					print(picked_object)
-
-					match picked_object.get_groups()[0]:
-
-						"Books":
-							print("Book")
-							var picked_book = picked_object
-
-							var stored_books = book_storage.get_children()
-							if stored_books.size() < book_capacity:
+					
+					# Possible better way of doing things. If we decide it's unnecessary, just get rid of this little block of code.
+					if picked_object is Inventory:
+						var stored_books = book_storage.get_children()
+						if len(stored_books) > 0:
+							picked_object.append(stored_books[-1])
+							stored_books[-1].queue_free()
+					
+					else:
+						match picked_object.get_groups()[0]:
+	
+							"Books":
+								print("Book")
+								var picked_book = picked_object
+	
+								var stored_books = book_storage.get_children()
+								if stored_books.size() < book_capacity:
+									
+									pick_up_book(picked_book)
+	
+								else:
+									drop_book(stored_books[0])
+									pick_up_book(picked_book)
 								
-								pick_up_book(picked_book)
-
-							else:
-								drop_book(stored_books[0])
-								pick_up_book(picked_book)
+								update_book_stack()
+	
+							"Bookshelfs":
+								var selected_bookshelf = picked_object
+	
+								var stored_books = book_storage.get_children()
+	
+								if stored_books.size() > 0:
+									
+									# get book from the bottom
+									var bottom_book = stored_books[0]
+									book_to_shelf(bottom_book, selected_bookshelf)
 							
-							update_book_stack()
-
-						"Bookshelfs":
-							var selected_bookshelf = picked_object
-
-							var stored_books = book_storage.get_children()
-
-							if stored_books.size() > 0:
-								
-								# get book from the bottom
-								var bottom_book = stored_books[0]
-								book_to_shelf(bottom_book, selected_bookshelf)
-						
-							update_book_stack()
-						
-						"Counter":
-							#TODO
-							pass
-
-						"Ladder":
-							pass
+								update_book_stack()
+							
+							"Counter":
+								#TODO
+								pass
+	
+							"Ladder":
+								pass
 
 
 
