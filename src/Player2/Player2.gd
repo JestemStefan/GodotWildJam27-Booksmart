@@ -1,8 +1,8 @@
 extends KinematicBody
 
 # Meta #
-enum State { DEFAULT }
-var state : int = State.DEFAULT
+enum State { DEFAULT, LADDER }
+var state : int 
 
 # Movement #
 var velocity := Vector3.ZERO
@@ -13,8 +13,11 @@ const GRAVITY := -40
 const JUMP_SPEED := 10
 var direction := Vector2.ZERO
 
+# Ladder movement #
+var ladder: StaticBody
+
 # Picking up #
-onready var detect_book_ray: RayCast = $GimbalX/PickBookRay
+onready var interact_ray: RayCast = $GimbalX/InteractRay
 onready var interact_area : Area = $GimbalX/InteractionArea
 onready var book_storage: Spatial = $GimbalX/BookStorage
 
@@ -22,7 +25,7 @@ export var book_capacity: int
 
 
 func _ready() -> void:
-	pass
+	state = State.DEFAULT
 
 
 
@@ -46,65 +49,132 @@ func process_input(delta : float) -> void:
 			
 			direction = direction.normalized()
 			
-			# ------------------------------------------------------------------
-			# Jumping
-			if is_on_floor():
-				if Input.is_action_pressed("move_jump"):
-					velocity.y = JUMP_SPEED
+#
+#			# ------------------------------------------------------------------
+#			# Jumping
+#			if is_on_floor():
+#				if Input.is_action_pressed("move_jump"):
+#					velocity.y = JUMP_SPEED
+					
 
 
 			#Picking up books
 			if Input.is_action_just_pressed("interact"): #mapped as E key
 				
-				#if detect_book_ray.is_colliding():
-					#var picked_book: RigidBody = detect_book_ray.get_collider()
-					
-				# get_bodies in layer 3
-				var interactable_items = interact_area.get_overlapping_bodies() 
-				print(interactable_items)
-				
-				var books = []
-				var bookshelfs = []
-				var lib_counter = []
-				
-				for item in interactable_items:
-					match item.get_groups()[0]:
+				if interact_ray.is_colliding():
+					var picked_object = interact_ray.get_collider()
+
+					print(picked_object)
+
+					match picked_object.get_groups()[0]:
+
 						"Books":
-							books.append(item)
-							print("Books: ")
-						
+							print("Book")
+							var picked_book = picked_object
+
+							var stored_books = book_storage.get_children()
+							if stored_books.size() < book_capacity:
+								
+								pick_up_book(picked_book)
+
+							else:
+								drop_book(stored_books[0])
+								pick_up_book(picked_book)
+							
+							update_book_stack()
+
 						"Bookshelfs":
-							bookshelfs.append(item)
-							print("Bookshelfs: ")
-					
-				var stored_books = book_storage.get_children()
-				
-				# if some book can be picked up
-				if books.size() > 0 and stored_books.size() < book_capacity: 
-					var picked_book = books[0]  # pick first book
-					
-					pick_up_book(picked_book)
-					
-				 # no free books detected
-				else:
-				
-					# check if there are any books above head
-					
-					if stored_books.size() > 0:
-						var bottom_book = stored_books[0] # get book from the bottom
+							var selected_bookshelf = picked_object
+
+							var stored_books = book_storage.get_children()
+
+							if stored_books.size() > 0:
+								
+								# get book from the bottom
+								var bottom_book = stored_books[0]
+								book_to_shelf(bottom_book, selected_bookshelf)
 						
-						if bookshelfs.size() > 0:
-							var selected_bookshelf = bookshelfs[0]
+							update_book_stack()
 						
-							book_to_shelf(bottom_book, selected_bookshelf)
+						"Counter":
+							#TODO
+							pass
+
+						"Ladder":
+							pass
+
+
+
+			if Input.is_action_just_pressed("use"): #mapped as Space
+				if interact_ray.is_colliding():
+					var picked_object = interact_ray.get_collider()
+					
+					if picked_object.get_groups()[0] == "Ladder":
 						
-						else:
-							# Throw a book on the ground if you don't want it?
-							drop_book(bottom_book)
+						ladder = picked_object
+
+						state = State.LADDER
+
+						# Disable collision for a ladder
+						interact_ray.set_collision_mask(8)
+
+		
+		State.LADDER:
+			
+			# ------------------------------------------------------------------
+			# Movement direction
+			direction = Vector2.ZERO
+			
+			direction.y += int(Input.is_action_pressed("move_backward")) - int(Input.is_action_pressed("move_forward"))
+			direction.x += int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+			
+			direction = direction.normalized()
+			
+			
+			#Picking up books
+			if Input.is_action_just_pressed("interact"): #mapped as E key
+	
+				if interact_ray.is_colliding():
+					var picked_object = interact_ray.get_collider()
+
+					print(picked_object)
+
+					match picked_object.get_groups()[0]:
+
+						"Books":
+							var picked_book = picked_object
+
+							var stored_books = book_storage.get_children()
+							if stored_books.size() < book_capacity:
+								
+								pick_up_book(picked_book)
+
+							else:
+								drop_book(stored_books[0])
+								pick_up_book(picked_book)
+							
+
+						"Bookshelfs":
+							var selected_bookshelf = picked_object
+
+							var stored_books = book_storage.get_children()
+
+							if stored_books.size() > 0:
+								
+								# get book from the bottom
+								var bottom_book = stored_books[0]
+								book_to_shelf(bottom_book, selected_bookshelf)
 				
 				update_book_stack()
+						
+			
+			
+			if Input.is_action_just_pressed("use"): #mapped as Space
+					state = State.DEFAULT
 
-
+					# Enable collision for a ladder
+					interact_ray.set_collision_mask(24)
+			
 
 func process_movement(delta : float) -> void:
 	
@@ -114,22 +184,35 @@ func process_movement(delta : float) -> void:
 			
 			velocity.y += GRAVITY * delta
 			
-			velocity.x += ACCELERATION * direction.x
-			velocity.z += ACCELERATION * direction.y
-			
-			velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
-			velocity.z = clamp(velocity.z, -MAX_SPEED, MAX_SPEED)
-			
+			if is_on_floor():
+				velocity.x += ACCELERATION * direction.x
+				velocity.z += ACCELERATION * direction.y
+				
+				velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
+				velocity.z = clamp(velocity.z, -MAX_SPEED, MAX_SPEED)
+				
+				var rotation_dir = Vector3(direction.x, 0, direction.y)
+				
+				if rotation_dir != Vector3.ZERO:
+					look_at(global_transform.origin + rotation_dir, Vector3.UP)
+				
 			velocity = move_and_slide(velocity, Vector3.UP, true)
 			
 			velocity.x = lerp(velocity.x, 0, DEACCELERATION_WEIGHT)
 			velocity.z = lerp(velocity.z, 0, DEACCELERATION_WEIGHT)
 			
-			var rotation_dir = velocity
-			rotation_dir.y = 0
 			
-			if rotation_dir != Vector3.ZERO:
-				look_at(global_transform.origin + rotation_dir, Vector3.UP)
+
+		State.LADDER:
+
+			
+			
+			velocity.y = -direction.y * 0.1
+			velocity.x = direction.x * 0.1
+			
+			translate(velocity)
+			
+			ladder.translate(Vector3(velocity.x, 0, 0))
 
 
 

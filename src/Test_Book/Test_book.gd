@@ -5,19 +5,19 @@ class_name Book
 
 func pick_up() -> void:
 	# Disable collision
-	set_collision_mask_bit(0, false)
-	set_collision_layer_bit(0, false)
+	set_collision_mask(0)
+	set_collision_layer(0)
 
 
 
 func throw() -> void:
 	# Enable collision
-	set_collision_mask_bit(0, true)
-	set_collision_layer_bit(0, true)
+	set_collision_mask(31)
+	set_collision_layer(8)
 
 
 
 func place() -> void:
 	# Enable collision
-	set_collision_mask_bit(0, true)
-	set_collision_layer_bit(0, true)
+	set_collision_mask(0)
+	set_collision_layer(8)

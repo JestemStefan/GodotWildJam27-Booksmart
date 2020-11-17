@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Test_Book/Test_book.gd" type="Script" id=1]
 
@@ -8,14 +8,18 @@ rough = true
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.2, 0.8, 0.6 )
 
-[sub_resource type="CubeMesh" id=3]
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 3 )
 size = Vector3( 0.4, 1.6, 1.2 )
 
 [node name="TestBook" type="RigidBody" groups=[
 "Books",
 ]]
-collision_layer = 4
-collision_mask = 7
+collision_layer = 2147483656
+collision_mask = 2147483679
 mass = 10.0
 physics_material_override = SubResource( 1 )
 script = ExtResource( 1 )
@@ -24,5 +28,5 @@ script = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
