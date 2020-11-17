@@ -20,16 +20,16 @@ extents = Vector3( 20, 1, 20 )
 [sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 5 )
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 1, 8, 15 )
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 11.9282, 1.35921, 1 )
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=6]
 extents = Vector3( 0.698316, 1, 6.86403 )
 
-[sub_resource type="GIProbeData" id=4]
+[sub_resource type="GIProbeData" id=7]
 bounds = AABB( -15.5594, -14.7407, -23.3313, 31.1188, 29.4814, 46.6626 )
 cell_size = 0.364552
 to_cell_xform = Transform( 2.7431, 0, 0, 0, 2.7431, 0, 0, 0, 2.7431, 42.6809, 40.4352, 64 )
@@ -75,19 +75,19 @@ material/0 = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2538, 6.17743, 8.08494 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.254, 6.177, 8.085 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -0.018116, 6.17743, -3.07623 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.0178795, 6.177, 20.3388 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Furniture" type="Spatial" parent="Level_Assets"]
 
@@ -100,15 +100,15 @@ material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28651, 10.1041 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9725, 0, 4.34136 )
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.973, 0, 4.341 )
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="Lights" type="Spatial" parent="Level_Assets"]
 
@@ -117,7 +117,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.88995, 0 )
 visible = false
 extents = Vector3( 15.5594, 14.7407, 23.3313 )
 energy = 0.2
-data = SubResource( 4 )
+data = SubResource( 7 )
 
 [node name="OmniLight" type="OmniLight" parent="Level_Assets/Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.89617, 12.3329, 1.70602 )

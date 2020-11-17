@@ -201,7 +201,7 @@ func process_movement(delta : float) -> void:
 					anim_player.play("Run")
 					foot_smoke.set_emitting(true)
 				
-				else:''
+				else:
 					anim_player.play("Idle")
 					foot_smoke.set_emitting(false)
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Confusion-Voice-3.ogg-c078cc008e9606e4ffab419cc7f3a6cd.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/Confusion-Voice-3.ogg"
+dest_files=[ "res://.import/Confusion-Voice-3.ogg-c078cc008e9606e4ffab419cc7f3a6cd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
