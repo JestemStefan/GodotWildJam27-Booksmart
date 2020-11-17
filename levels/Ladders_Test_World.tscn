@@ -39,6 +39,8 @@ shape = SubResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.44317, -1.36396, 0 )
+collision_layer = 4
+collision_mask = 27
 
 [node name="BackBopokshelf" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63616, -1.59701, -4.62556 )
