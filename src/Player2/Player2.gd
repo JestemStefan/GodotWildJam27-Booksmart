@@ -59,7 +59,7 @@ func process_input(delta : float) -> void:
 
 
 			#Picking up books
-			if Input.is_action_just_pressed("pick"): #mapped as E key
+			if Input.is_action_just_pressed("interact"): #mapped as E key
 				
 				if interact_ray.is_colliding():
 					var picked_object = interact_ray.get_collider()
@@ -69,6 +69,7 @@ func process_input(delta : float) -> void:
 					match picked_object.get_groups()[0]:
 
 						"Books":
+							print("Book")
 							var picked_book = picked_object
 
 							var stored_books = book_storage.get_children()
@@ -131,7 +132,7 @@ func process_input(delta : float) -> void:
 			
 			
 			#Picking up books
-			if Input.is_action_just_pressed("pick"): #mapped as E key
+			if Input.is_action_just_pressed("interact"): #mapped as E key
 	
 				if interact_ray.is_colliding():
 					var picked_object = interact_ray.get_collider()
