@@ -30,7 +30,9 @@ bind/2/name = "wheel_r"
 bind/2/bone = -1
 bind/2/pose = Transform( -8.74228e-08, 1.94707e-07, -1, 1, 1.32326e-14, -8.74228e-08, -1.70218e-14, -1, -1.94707e-07, 1.38527e-06, -1.31909, -7.60107 )
 
-[node name="Ladder" type="Spatial"]
+[node name="Ladder" type="Spatial" groups=[
+"Ladder",
+]]
 
 [node name="ladder" type="Spatial" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 4.17883, 0 )
