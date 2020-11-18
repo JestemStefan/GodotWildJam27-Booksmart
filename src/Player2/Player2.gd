@@ -6,7 +6,7 @@ var state : int
 
 # Movement #
 var velocity := Vector3.ZERO
-const MAX_SPEED := 12
+const MAX_SPEED := 8
 const ACCELERATION := 6
 const DEACCELERATION_WEIGHT := 0.8
 const GRAVITY := -40
@@ -117,6 +117,8 @@ func process_input(delta : float) -> void:
 
 
 			if Input.is_action_just_pressed("use"): #mapped as Space
+				
+				
 				if interact_ray.is_colliding():
 					var picked_object = interact_ray.get_collider()
 					
