@@ -33,7 +33,7 @@ extents = Vector3( 0.698316, 1, 6.86403 )
 bounds = AABB( -15.5594, -14.7407, -23.3313, 31.1188, 29.4814, 46.6626 )
 cell_size = 0.364552
 to_cell_xform = Transform( 2.7431, 0, 0, 0, 2.7431, 0, 0, 0, 2.7431, 42.6809, 40.4352, 64 )
-dynamic_data = PoolIntArray( 0, 8, 128, 128, 128, 1, 0, 0, 0, 1098907648, 1098907648, 0, 702497616, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 8355711, 0 )
+dynamic_data = PoolIntArray( 0, 8, 128, 128, 128, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1958, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 8355711, 0 )
 dynamic_range = 4
 energy = 0.2
 bias = 1.5
@@ -114,7 +114,6 @@ shape = SubResource( 6 )
 
 [node name="GIProbe" type="GIProbe" parent="Level_Assets/Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.88995, 0 )
-visible = false
 extents = Vector3( 15.5594, 14.7407, 23.3313 )
 energy = 0.2
 data = SubResource( 7 )
@@ -132,6 +131,10 @@ light_color = Color( 1, 0.796078, 0, 1 )
 light_bake_mode = 2
 shadow_enabled = true
 omni_range = 20.0
+
+[node name="Listener" type="Listener" parent="Level_Assets"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.4641 )
+current = true
 
 [node name="Bookshelfs" type="Spatial" parent="."]
 
