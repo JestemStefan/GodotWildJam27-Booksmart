@@ -69,4 +69,4 @@ transform = Transform( 0.997676, -0.0681369, 0, 0.0681369, 0.997676, 0, 0, 0, 1,
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.46612, -1.43067, -7.11132 )
 
 [node name="Desk" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7886, 0, -3.73541 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7886, -1.51317, -3.73541 )

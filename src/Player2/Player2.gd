@@ -8,7 +8,7 @@ var state : int
 var velocity := Vector3.ZERO
 const MAX_SPEED := 8
 const ACCELERATION := 6
-const DEACCELERATION_WEIGHT := 0.8
+const DEACCELERATION_WEIGHT := 0.4
 const GRAVITY := -40
 const JUMP_SPEED := 10
 var direction := Vector2.ZERO
@@ -30,7 +30,7 @@ export var book_capacity: int
 
 func _ready() -> void:
 	state = State.DEFAULT
-	anim_player.play("Idle")
+	change_animation("Idle")
 
 
 
@@ -113,7 +113,11 @@ func process_input(delta : float) -> void:
 	
 							"Ladder":
 								pass
-
+				
+				else:
+					var stored_books = book_storage.get_children()
+					if stored_books.size() > 0:
+						drop_book(stored_books[0]) 
 
 
 			if Input.is_action_just_pressed("use"): #mapped as Space
@@ -178,6 +182,12 @@ func process_input(delta : float) -> void:
 								var bottom_book = stored_books[0]
 								book_to_shelf(bottom_book, selected_bookshelf)
 				
+				else:
+					var stored_books = book_storage.get_children()
+
+					if stored_books.size() > 0:
+						drop_book(stored_books[0]) 
+
 				update_book_stack()
 						
 			
@@ -200,12 +210,10 @@ func process_movement(delta : float) -> void:
 			if is_on_floor():
 				
 				if direction != Vector2.ZERO:
-					anim_player.play("Run")
-					foot_smoke.set_emitting(true)
+					change_animation("Run")
 				
 				else:
-					anim_player.play("Idle")
-					foot_smoke.set_emitting(false)
+					change_animation("Idle")
 
 				velocity.x += ACCELERATION * direction.x
 				velocity.z += ACCELERATION * direction.y
@@ -296,3 +304,17 @@ func drop_book(book):
 func update_book_stack():
 	for book in book_storage.get_children():
 		book.set_translation(Vector3.RIGHT * book.get_index())
+		
+
+func change_animation(anim_name):
+	match anim_name:
+		"Run":
+			anim_player.play(anim_name)
+			anim_player.set_speed_scale(2)
+			foot_smoke.set_emitting(true)
+
+		
+		"Idle":
+			anim_player.play(anim_name)
+			anim_player.set_speed_scale(1)
+			foot_smoke.set_emitting(false)

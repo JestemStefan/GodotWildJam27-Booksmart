@@ -12,6 +12,7 @@
 [ext_resource path="res://src/Ladder/Ladder.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Decorations/WallTorch.tscn" type="PackedScene" id=11]
 [ext_resource path="res://models/bookshelf/bookshelf_d.png" type="Texture" id=12]
+[ext_resource path="res://src/Customers/CustomerManager.tscn" type="PackedScene" id=13]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
@@ -19,37 +20,26 @@ albedo_texture = ExtResource( 3 )
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 20, 1, 20 )
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 5 )
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 1, 8, 15 )
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=5]
 albedo_texture = ExtResource( 12 )
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=6]
 extents = Vector3( 11.9282, 1.35921, 1 )
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.698316, 1, 6.86403 )
-
-[sub_resource type="GIProbeData" id=7]
-bounds = AABB( -15.5594, -14.7407, -23.3313, 31.1188, 29.4814, 46.6626 )
-cell_size = 0.364552
-to_cell_xform = Transform( 2.7431, 0, 0, 0, 2.7431, 0, 0, 0, 2.7431, 42.6809, 40.4352, 64 )
-dynamic_data = PoolIntArray( 0, 8, 128, 128, 128, 1, 0, 0, 0, 1094713344, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 8355711, 0 )
-dynamic_range = 4
-energy = 0.2
-bias = 1.5
-normal_bias = 0.0
-propagation = 0.7
 
 [node name="Test_Level" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.999974, -0.00621221, 0.00358662, 0, 0.5, 0.866025, -0.00717324, -0.866003, 0.499987, 0, 22.6542, 16.9255 )
-fov = 45.0
+transform = Transform( 1, 0, 0, 0, 0.775694, 0.631109, 0, -0.631109, 0.775694, 0, 16.8673, 24.5271 )
+fov = 53.0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66214, 8.17984 )
@@ -76,7 +66,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.32729, 0 )
 [node name="MeshInstance" type="MeshInstance" parent="Level_Assets/Floor_Walls/Walls"]
 use_in_baked_light = true
 mesh = ExtResource( 4 )
-material/0 = SubResource( 8 )
+material/0 = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2538, 6.17743, 8.08494 )
@@ -101,27 +91,21 @@ shape = SubResource( 4 )
 [node name="MeshInstance" type="MeshInstance" parent="Level_Assets/Furniture/Counter_Shelfs"]
 use_in_baked_light = true
 mesh = ExtResource( 6 )
-material/0 = SubResource( 9 )
+material/0 = SubResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28651, 10.1041 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9725, 0, 4.34136 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.973, 0, 4.341 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="Lights" type="Spatial" parent="Level_Assets"]
-
-[node name="GIProbe" type="GIProbe" parent="Level_Assets/Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.88995, 0 )
-extents = Vector3( 15.5594, 14.7407, 23.3313 )
-energy = 0.2
-data = SubResource( 7 )
 
 [node name="OmniLight" type="OmniLight" parent="Level_Assets/Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.634, 8.18194, 0.0617788 )
@@ -131,7 +115,7 @@ shadow_enabled = true
 omni_range = 20.0
 
 [node name="OmniLight2" type="OmniLight" parent="Level_Assets/Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6125, 11.0171, 8.76609 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.81522, 11.0171, 8.76609 )
 light_color = Color( 1, 0.796078, 0, 1 )
 light_bake_mode = 2
 shadow_enabled = true
@@ -184,3 +168,17 @@ transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 9.59523
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.3461 )
 
 [node name="Ladder" parent="." instance=ExtResource( 10 )]
+
+[node name="CustomerManager" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.1652 )
+
+[node name="SpawnPosition" parent="CustomerManager" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5197, 0, 0.395954 )
+
+[node name="ExitPosition" parent="CustomerManager" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6133, 0, 0.285017 )
+
+[node name="Customer_Wizard" parent="CustomerManager" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5889, 0, 0 )
+
+[editable path="CustomerManager"]
