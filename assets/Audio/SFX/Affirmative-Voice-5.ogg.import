@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Affirmative-Voice-5.ogg-53debc19448d2448865927e8e1e192ba.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/Affirmative-Voice-5.ogg"
+dest_files=[ "res://.import/Affirmative-Voice-5.ogg-53debc19448d2448865927e8e1e192ba.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

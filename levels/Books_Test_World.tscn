@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/2D/icon.png" type="Texture" id=1]
 [ext_resource path="res://src/Test_Book/Test_book.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Bookshelf/Test_Bookshelf.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Desk/Desk.tscn" type="PackedScene" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 1 )
@@ -38,10 +39,34 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.44317, -0.303007, 0 )
 transform = Transform( 0.899138, 0, 0.437665, 0, 1, 0, -0.437665, 0, 0.899138, 0, 1.97213, -9.19382 )
 
 [node name="TestBook2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.798194, 0, -0.6024, 0, 1, 0, 0.6024, 0, 0.798194, -8.52269, 3.13941, -9.36726 )
+transform = Transform( 0.798194, 0, -0.6024, 0, 1, 0, 0.6024, 0, 0.798194, -8.52269, 1.13941, -9.36726 )
 
 [node name="TestBook3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.557846, 0.829944, 0, -0.829944, 0.557846, 0, 0, 0, 1, 0, 3.04515, -2.65113 )
+transform = Transform( 0.997676, -0.0681369, 0, 0.0681369, 0.997676, 0, 0, 0, 1, 0, 1.04515, -2.65113 )
+
+[node name="TestBook4" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.997676, -0.0681369, 0, 0.0681369, 0.997676, 0, 0, 0, 1, 7.17364, 1.04515, -7.09369 )
+
+[node name="TestBook5" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.997676, -0.0681369, 0, 0.0681369, 0.997676, 0, 0, 0, 1, 10.5238, 1.04515, -4.58109 )
+
+[node name="TestBook6" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.997676, -0.0681369, 0, 0.0681369, 0.997676, 0, 0, 0, 1, 12.745, 1.04515, -6.94803 )
+
+[node name="TestBook7" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.997676, -0.0681369, 0, 0.0681369, 0.997676, 0, 0, 0, 1, 10.2689, 1.04515, -9.35139 )
+
+[node name="TestBook8" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.997676, -0.0681369, 0, 0.0681369, 0.997676, 0, 0, 0, 1, 6.95515, 1.04515, -11.5363 )
+
+[node name="TestBook9" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.997676, -0.0681369, 0, 0.0681369, 0.997676, 0, 0, 0, 1, 5.95515, 1.04515, -8.53625 )
+
+[node name="TestBook10" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.997676, -0.0681369, 0, 0.0681369, 0.997676, 0, 0, 0, 1, 6.97476, 1.04515, -3.98445 )
 
 [node name="Test_Bookshelf" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.46612, -1.43067, -7.11132 )
+
+[node name="Desk" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7886, -1.51317, -3.73541 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Santas_2.ogg-fd725581ff793e0639a50291052c3780.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/Santas_2.ogg"
+dest_files=[ "res://.import/Santas_2.ogg-fd725581ff793e0639a50291052c3780.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

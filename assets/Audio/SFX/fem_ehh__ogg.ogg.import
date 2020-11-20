@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/fem_ehh__ogg.ogg-bebb365bba71ecffeeb437f3bbb5d614.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/fem_ehh__ogg.ogg"
+dest_files=[ "res://.import/fem_ehh__ogg.ogg-bebb365bba71ecffeeb437f3bbb5d614.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

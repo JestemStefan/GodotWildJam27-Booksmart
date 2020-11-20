@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/male_frustrated_customer_1a.ogg-c52f6be8b85f19d6ea36b451e92338f9.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/male_frustrated_customer_1a.ogg"
+dest_files=[ "res://.import/male_frustrated_customer_1a.ogg-c52f6be8b85f19d6ea36b451e92338f9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -17,6 +17,7 @@ extents = Vector3( 20, 1, 20 )
 
 [node name="TestPlane" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0 )
+visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="TestPlane"]
 mesh = SubResource( 2 )
@@ -27,4 +28,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 shape = SubResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.44317, -0.303007, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 51, 31 )
+size = 25.0

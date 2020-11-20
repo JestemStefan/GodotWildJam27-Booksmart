@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/fem_huh__ogg.ogg-9721ec447eaa38e5e424670427b2d455.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/fem_huh__ogg.ogg"
+dest_files=[ "res://.import/fem_huh__ogg.ogg-9721ec447eaa38e5e424670427b2d455.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,185 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://models/floortiles/floortile_wood_level.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://models/floortiles/wood_texture.png" type="Texture" id=3]
+[ext_resource path="res://models/level_misc/level_walls.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://models/level_misc/stonewood_texture.png" type="Texture" id=5]
+[ext_resource path="res://models/level_misc/level_windows-shelf.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://src/Bookshelf/Tall_Bookshelf.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Bookshelf/Bookshelf.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Desk/Desk.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Ladder/Ladder.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Decorations/WallTorch.tscn" type="PackedScene" id=11]
+[ext_resource path="res://models/bookshelf/bookshelf_d.png" type="Texture" id=12]
+[ext_resource path="res://src/Customers/CustomerManager.tscn" type="PackedScene" id=13]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 20, 1, 20 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 5 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1, 8, 15 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 12 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 11.9282, 1.35921, 1 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 0.698316, 1, 6.86403 )
+
+[node name="Test_Level" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.58374, 0.811941, 0, -0.811941, 0.58374, 0, 19.7471, 16.3137 )
+fov = 53.0
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.19196, 0.66214, 2.00864 )
+
+[node name="Level_Assets" type="Spatial" parent="."]
+
+[node name="Floor_Walls" type="Spatial" parent="Level_Assets"]
+
+[node name="Floor" type="StaticBody" parent="Level_Assets/Floor_Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.68712 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Level_Assets/Floor_Walls/Floor"]
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Level_Assets/Floor_Walls/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 2 )
+
+[node name="Walls" type="StaticBody" parent="Level_Assets/Floor_Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.32729, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Level_Assets/Floor_Walls/Walls"]
+use_in_baked_light = true
+mesh = ExtResource( 4 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2538, 6.17743, 8.08494 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.254, 6.177, 8.085 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -0.018116, 6.17743, -3.07623 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.0178795, 6.177, 20.3388 )
+shape = SubResource( 4 )
+
+[node name="Furniture" type="Spatial" parent="Level_Assets"]
+
+[node name="Counter_Shelfs" type="StaticBody" parent="Level_Assets/Furniture"]
+
+[node name="MeshInstance" type="MeshInstance" parent="Level_Assets/Furniture/Counter_Shelfs"]
+use_in_baked_light = true
+mesh = ExtResource( 6 )
+material/0 = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28651, 10.1041 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9725, 0, 4.34136 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.973, 0, 4.341 )
+shape = SubResource( 7 )
+
+[node name="Lights" type="Spatial" parent="Level_Assets"]
+
+[node name="OmniLight" type="OmniLight" parent="Level_Assets/Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.634, 8.18194, 0.0617788 )
+light_color = Color( 1, 0.796078, 0, 1 )
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 20.0
+
+[node name="OmniLight2" type="OmniLight" parent="Level_Assets/Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.81522, 11.0171, 8.76609 )
+light_color = Color( 1, 0.796078, 0, 1 )
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 20.0
+
+[node name="WallTorch" parent="Level_Assets/Lights" instance=ExtResource( 11 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 11.4085, 7, 0 )
+
+[node name="Listener" type="Listener" parent="Level_Assets"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.4641 )
+current = true
+
+[node name="Bookshelfs" type="Spatial" parent="."]
+
+[node name="Back_row" type="Spatial" parent="Bookshelfs"]
+
+[node name="Tall_Bookshelf" parent="Bookshelfs/Back_row" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.26993 )
+
+[node name="Tall_Bookshelf2" parent="Bookshelfs/Back_row" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1.26993 )
+
+[node name="Tall_Bookshelf4" parent="Bookshelfs/Back_row" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1.26993 )
+
+[node name="Tall_Bookshelf5" parent="Bookshelfs/Back_row" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -1.26993 )
+
+[node name="Tall_Bookshelf3" parent="Bookshelfs/Back_row" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -1.26993 )
+
+[node name="Front_row" type="Spatial" parent="Bookshelfs"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.896668, 0, 0 )
+
+[node name="Bookshelf" parent="Bookshelfs/Front_row" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.42829 )
+
+[node name="Bookshelf3" parent="Bookshelfs/Front_row" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6.42829 )
+
+[node name="Bookshelf2" parent="Bookshelfs/Front_row" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6.42829 )
+
+[node name="Side" type="Spatial" parent="Bookshelfs"]
+
+[node name="Bookshelf" parent="Bookshelfs/Side" instance=ExtResource( 8 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 9.59523, 0, 3.15814 )
+
+[node name="Desk" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.3461 )
+
+[node name="Ladder" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.827157 )
+
+[node name="CustomerManager" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.1652 )
+
+[node name="SpawnPosition" parent="CustomerManager" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5197, 0, 0.395954 )
+
+[node name="ExitPosition" parent="CustomerManager" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6133, 0, 0.285017 )
+
+[node name="Customer_Wizard" parent="CustomerManager" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5889, 0, 0 )
+
+[editable path="CustomerManager"]
