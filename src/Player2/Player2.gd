@@ -131,6 +131,7 @@ func process_input(delta : float) -> void:
 						ladder = picked_object
 						
 						translation.x = ladder.translation.x
+						rotation.y = 0
 						
 						state = State.LADDER
 
@@ -242,7 +243,6 @@ func process_movement(delta : float) -> void:
 			vel.y = -direction.y * 0.1
 			vel.x = direction.x * 0.1
 			
-			#TODO CLAMP
 				
 			if direction.y < 0:
 				change_animation("Ladder_up")
@@ -253,9 +253,15 @@ func process_movement(delta : float) -> void:
 			else:
 				change_animation("STOP")
 				
-			translate(vel)
-			
+			#left right
 			ladder.translate(Vector3(vel.x, 0, 0))
+			ladder.translation.x = clamp(ladder.translation.x, -9, 9)
+			translation.x = ladder.translation.x
+			
+			#up down
+			translate(Vector3(0, vel.y, 0))
+			translation.y = clamp(translation.y, 0.1, 7)
+
 
 
 
