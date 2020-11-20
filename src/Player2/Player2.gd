@@ -14,7 +14,7 @@ const JUMP_SPEED := 10
 var direction := Vector2.ZERO
 
 # Ladder movement #
-var ladder: StaticBody
+var ladder
 
 # Animations
 onready var anim_player: AnimationPlayer = $char_page/AnimationPlayer
@@ -129,7 +129,9 @@ func process_input(delta : float) -> void:
 					if picked_object.get_groups()[0] == "Ladder":
 						
 						ladder = picked_object
-
+						
+						translation.x = ladder.translation.x
+						
 						state = State.LADDER
 
 						# Disable collision for a ladder
@@ -235,14 +237,25 @@ func process_movement(delta : float) -> void:
 
 		State.LADDER:
 
+			var vel = Vector3.ZERO
 			
+			vel.y = -direction.y * 0.1
+			vel.x = direction.x * 0.1
 			
-			velocity.y = -direction.y * 0.1
-			velocity.x = direction.x * 0.1
+			#TODO CLAMP
+				
+			if direction.y < 0:
+				change_animation("Ladder_up")
+			elif direction.y > 0:
+				change_animation("Ladder_down")
+				vel.y = vel.y * 1.5
+				
+			else:
+				change_animation("STOP")
+				
+			translate(vel)
 			
-			translate(velocity)
-			
-			ladder.translate(Vector3(velocity.x, 0, 0))
+			ladder.translate(Vector3(vel.x, 0, 0))
 
 
 
@@ -318,3 +331,19 @@ func change_animation(anim_name):
 			anim_player.play(anim_name)
 			anim_player.set_speed_scale(1)
 			foot_smoke.set_emitting(false)
+		
+		
+		"Ladder_up":
+			anim_player.play(anim_name)
+			anim_player.set_speed_scale(3)
+			foot_smoke.set_emitting(false)
+			
+			
+		"Ladder_down":
+			anim_player.play(anim_name)
+			anim_player.set_speed_scale(1)
+			foot_smoke.set_emitting(false)
+			
+		"STOP":
+			anim_player.play("Ladder_up")
+			anim_player.stop()

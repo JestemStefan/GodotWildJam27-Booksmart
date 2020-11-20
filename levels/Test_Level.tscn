@@ -38,11 +38,11 @@ extents = Vector3( 0.698316, 1, 6.86403 )
 [node name="Test_Level" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.775694, 0.631109, 0, -0.631109, 0.775694, 0, 16.8673, 24.5271 )
+transform = Transform( 1, 0, 0, 0, 0.58374, 0.811941, 0, -0.811941, 0.58374, 0, 19.7471, 16.3137 )
 fov = 53.0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66214, 8.17984 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.19196, 0.66214, 2.00864 )
 
 [node name="Level_Assets" type="Spatial" parent="."]
 
@@ -168,6 +168,7 @@ transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 9.59523
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.3461 )
 
 [node name="Ladder" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.827157 )
 
 [node name="CustomerManager" parent="." instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.1652 )
