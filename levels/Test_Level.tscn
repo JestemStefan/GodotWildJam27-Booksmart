@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://models/floortiles/floortile_wood_level.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/Decorations/WallTorch.tscn" type="PackedScene" id=11]
 [ext_resource path="res://models/bookshelf/bookshelf_d.png" type="Texture" id=12]
 [ext_resource path="res://src/Customers/CustomerManager.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/Test_Book/Test_book.tscn" type="PackedScene" id=14]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
@@ -181,5 +182,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6133, 0, 0.285017 )
 
 [node name="Customer_Wizard" parent="CustomerManager" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5889, 0, 0 )
+
+[node name="TestBook" parent="." instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6189, 1.08596, 8.16042 )
 
 [editable path="CustomerManager"]
