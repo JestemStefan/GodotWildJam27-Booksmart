@@ -14,20 +14,21 @@ var slid_out := false
 
 
 func _on_mouse_entered() -> void:
-	selected = true
+	if is_focused(): selected = true
 	update_slide()
 
 
 
 func _on_mouse_exited() -> void:
-	selected = false
+	if is_focused(): selected = false
 	update_slide()
 
 
 
 func _input(event) -> void:
-	if event.is_action_pressed("l_click") && selected:
+	if event.is_action_pressed("l_click") && selected && is_focused():
 		main_menu.change_menu(type)
+		update_slide()
 
 
 
@@ -44,3 +45,8 @@ func update_slide() -> void:
 		if selected: animation_player.play("slide_forward")
 		else: animation_player.play("slide_backward")
 
+
+func is_focused() -> bool:
+	if $"../..".focus == $"../..".Focuses.MAIN:
+		return true
+	return false

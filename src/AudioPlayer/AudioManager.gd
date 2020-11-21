@@ -4,7 +4,8 @@ const SIMPLE_AUDIO_PLAYER = preload("res://src/AudioPlayer/SimpleAudioPlayer.tsc
 const AUDIO_PLAYER_3D = preload("res://src/AudioPlayer/3D_Audio_Player.tscn")
 
 var audio_clips = {"ambient": preload("res://assets/Audio/GWJ27_loopable_idea_1.ogg"),
-					"santa_2": preload("res://assets/Audio/SFX/Santas_2.ogg")}
+					"santa_2": preload("res://assets/Audio/SFX/Santas_2.ogg"),
+					"menu": preload("res://assets/Audio/assets_Audio_GWJ27_Menu.ogg")}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
