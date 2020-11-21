@@ -1,6 +1,8 @@
 extends Inventory
 class_name Desk
 
+export var desk_capacity: int
+
 # Variables
 onready var books = $Books
 
