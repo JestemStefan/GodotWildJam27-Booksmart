@@ -8,6 +8,7 @@ var numeral : String = ["I", "II", "III", "IV"][randi() % 4]
 var symbol : String = ["ninja", "knight", "wizard", "archer"][randi() % 4]
 
 onready var mesh := $MeshInstance
+onready var pickUpArea: Area = $Area
 
 
 
@@ -29,20 +30,23 @@ func pick_up() -> void:
 	# Disable collision
 	set_collision_mask(0)
 	set_collision_layer(0)
+	pickUpArea.set_collision_layer(0)
 
 
 
 func throw() -> void:
 	# Enable collision
-	set_collision_mask(31)
-	set_collision_layer(8)
+	set_collision_mask(15)
+	set_collision_layer(2)
+	pickUpArea.set_collision_layer(8)
 
 
 
 func place() -> void:
 	# Enable collision
 	set_collision_mask(0)
-	set_collision_layer(8)
+	set_collision_layer(2)
+	pickUpArea.set_collision_layer(0)
 
 
 
