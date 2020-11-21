@@ -16,6 +16,7 @@ extents = Vector3( 1.9374, 0.801019, 0.69298 )
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 1 )
+desk_capacity = 2
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.746273, 0 )
@@ -27,4 +28,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.842638, 0 )
 shape = SubResource( 2 )
 
 [node name="Books" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26876, 0 )

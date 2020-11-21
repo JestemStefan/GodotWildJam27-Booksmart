@@ -68,51 +68,132 @@ func process_input(delta : float) -> void:
 				
 				if interact_ray.is_colliding():
 					var picked_object = interact_ray.get_collider()
-					
-					# Possible better way of doing things. If we decide it's unnecessary, just get rid of this little block of code.
-					if picked_object is Inventory:
-						var stored_books = book_storage.get_children()
-						if len(stored_books) > 0:
-							picked_object.append(stored_books[-1])
-							stored_books[-1].queue_free()
-					
-					else:
-						match picked_object.get_groups()[0]:
-	
-							"Books":
-								print("Book")
-								var picked_book = picked_object
-	
-								var stored_books = book_storage.get_children()
-								if stored_books.size() < book_capacity:
-									
-									pick_up_book(picked_book)
-	
-								else:
-									drop_book(stored_books[0])
-									pick_up_book(picked_book)
+					match picked_object.get_groups()[0]:
+
+						"Books":
+							print("Book")
+							var picked_book = picked_object.get_parent()
+
+							var stored_books = book_storage.get_children()
+							if stored_books.size() < book_capacity:
 								
-								update_book_stack()
-	
-							"Bookshelfs":
-								var selected_bookshelf = picked_object
-	
-								var stored_books = book_storage.get_children()
-	
-								if stored_books.size() > 0:
+								pick_up_book(picked_book)
+
+							else:
+								drop_book(stored_books[0])
+								pick_up_book(picked_book)
+							
+							update_book_stack()
+
+						"Bookshelfs":
+							
+							print("Bookshelf")
+							
+							var selected_bookshelf = picked_object
+
+							var stored_books = book_storage.get_children()
+							
+							
+							
+							if selected_bookshelf.state == 0:  #Free
+								if stored_books.size() > 0: # if there are books on head
 									
 									# get book from the bottom
 									var bottom_book = stored_books[0]
+									
+									#place book on the shelf
 									book_to_shelf(bottom_book, selected_bookshelf)
 							
-								update_book_stack()
+								else:
+									pass
+									
+							elif selected_bookshelf.state == 1:  # Taken
+								
+								var book_on_shelf = selected_bookshelf.get_node("BookPosition").get_child(0)
+								
+								if stored_books.size() < book_capacity:
+									shelf_to_player(selected_bookshelf, book_on_shelf)
+								
+								else:
+									if stored_books.size() > 0:
+										# get book from the bottom
+										var bottom_book = stored_books[0]
+										
+										switch_books(selected_bookshelf, bottom_book, book_on_shelf)
+								
+						
+							update_book_stack()
+						
+						"Desk":
+							print("Desk")
 							
-							"Counter":
-								#TODO
-								pass
-	
-							"Ladder":
-								pass
+							
+							# save picked object as desk
+							var selected_desk = picked_object
+							
+							# player books
+							var stored_books = book_storage.get_children()
+							
+							# access books position
+							var deskBooks = selected_desk.get_node("Books")
+							
+							# get books on desk
+							var books_on_desk = deskBooks.get_children()
+							
+							##################################################################
+							
+							# if player have some books
+							if stored_books.size() > 0:
+								
+								# get book from the bottom
+								var bottom_book = stored_books[0]
+								
+								######################################################################
+								# if desk is not full
+								if books_on_desk.size() < selected_desk.desk_capacity:
+
+									#put book on the desk
+									book_to_desk(deskBooks, bottom_book)
+								
+								######################################################################
+								
+								# or if desk is full
+								else:
+									
+									# if player have space for more books
+									if stored_books.size() < book_capacity:
+										#take book from the desk
+										desk_to_player(deskBooks, books_on_desk[0])
+										
+									# if both player and desk is full
+									else:
+										
+										# get bottom book from the desk
+										var bottom_book_on_desk = books_on_desk[0]
+										
+										# switch books
+										switch_books(deskBooks, bottom_book, bottom_book_on_desk)
+							
+							######################################################################################
+							
+							# if player don't have books
+							else:
+								
+								# if there are books on the desk
+								if books_on_desk.size() > 0:
+									
+									# get bottom book from the desk
+									var bottom_book_on_desk = books_on_desk[0]
+								
+									# pick book from the desk
+									desk_to_player(deskBooks, bottom_book_on_desk)
+
+							update_book_stack()
+
+							############################################################################################
+
+						"Ladder":
+							pass
 				
 				else:
 					var stored_books = book_storage.get_children()
@@ -153,15 +234,16 @@ func process_input(delta : float) -> void:
 			
 			#Picking up books
 			if Input.is_action_just_pressed("interact"): #mapped as E key
-	
+				
+				#Shoot a ray to check what is in front
 				if interact_ray.is_colliding():
+					
+					#save collider and check what it is
 					var picked_object = interact_ray.get_collider()
-
-					print(picked_object)
-
 					match picked_object.get_groups()[0]:
 
 						"Books":
+							print("Book")
 							var picked_book = picked_object
 
 							var stored_books = book_storage.get_children()
@@ -173,26 +255,47 @@ func process_input(delta : float) -> void:
 								drop_book(stored_books[0])
 								pick_up_book(picked_book)
 							
+							update_book_stack()
+
 
 						"Bookshelfs":
+							
+							print("Bookshelf")
+							
 							var selected_bookshelf = picked_object
 
 							var stored_books = book_storage.get_children()
-
-							if stored_books.size() > 0:
+							
+							
+							
+							if selected_bookshelf.state == 0:  #Free
+								if stored_books.size() > 0: # if there are books on head
+									
+									# get book from the bottom
+									var bottom_book = stored_books[0]
+									
+									#place book on the shelf
+									book_to_shelf(bottom_book, selected_bookshelf)
+							
+								else:
+									pass
+									
+							elif selected_bookshelf.state == 1:  # Taken
 								
-								# get book from the bottom
-								var bottom_book = stored_books[0]
-								book_to_shelf(bottom_book, selected_bookshelf)
-				
-				else:
-					var stored_books = book_storage.get_children()
-
-					if stored_books.size() > 0:
-						drop_book(stored_books[0]) 
-
-				update_book_stack()
+								var book_on_shelf = selected_bookshelf.get_node("BookPosition").get_child(0)
+								
+								if stored_books.size() < book_capacity:
+									shelf_to_player(selected_bookshelf, book_on_shelf)
+								
+								else:
+									if stored_books.size() > 0:
+										# get book from the bottom
+										var bottom_book = stored_books[0]
+										
+										switch_books(selected_bookshelf, bottom_book, book_on_shelf)
+								
 						
+							update_book_stack()
 			
 			
 			if Input.is_action_just_pressed("use"): #mapped as Space
@@ -286,7 +389,8 @@ func book_to_shelf(book, bookshelf):
 	book_storage.remove_child(book)
 	
 	# spawn in world
-	bookshelf.get_node("Shelf_space").add_child(book)
+	bookshelf.get_node("BookPosition").add_child(book)
+	bookshelf.enter_state(1) # 1 means taken
 	
 	# reset translation and rotation
 	book.translation = Vector3.ZERO
@@ -296,10 +400,90 @@ func book_to_shelf(book, bookshelf):
 	book.set_mode(1)
 	
 	book.place()
-	bookshelf.place_on_shelf(book)
 
 
+func shelf_to_player(bookshelf, book):
+	
+	print(book.get_name())
+	
+	bookshelf.get_node("BookPosition").remove_child(book)
+	
+	# spawn in world
+	book_storage.add_child(book)
+	bookshelf.enter_state(0) # 1 means Free
+	
+	#pause physics MODE_STATIC
+	book.set_mode(1)
+	
+	book.pick_up()
 
+
+func book_to_desk(desk, book):
+	
+	book_storage.remove_child(book)
+	
+	# spawn in world
+	desk.add_child(book)
+	
+	# reset translation and rotation
+	book.translation = Vector3.ZERO
+	book.rotation = Vector3.ZERO
+	
+	# pause physics
+	book.set_mode(1)
+	
+	book.place()
+	
+	
+func desk_to_player(desk, book):
+	
+	desk.remove_child(book)
+	
+	# spawn in world
+	book_storage.add_child(book)
+	
+	#pause physics MODE_STATIC
+	book.set_mode(1)
+	
+	book.pick_up()
+	
+
+func switch_books(bookshelf, head_book, shelf_book):
+	
+	book_storage.remove_child(head_book)
+	bookshelf.get_node("BookPosition").remove_child(shelf_book)
+	
+	# spawn in world
+	book_storage.add_child(shelf_book)
+	
+	bookshelf.get_node("BookPosition").add_child(head_book)
+	
+	#pause physics MODE_STATIC
+	head_book.set_mode(1)
+	shelf_book.set_mode(1)
+	
+	head_book.pick_up()
+	shelf_book.place()
+	
+
+func switch_books_desk(desk, head_book, desk_book):
+	
+	book_storage.remove_child(head_book)
+	desk.remove_child(desk_book)
+	
+	# spawn in world
+	book_storage.add_child(desk_book)
+	
+	desk.add_child(head_book)
+	
+	#pause physics MODE_STATIC
+	head_book.set_mode(1)
+	desk_book.set_mode(1)
+	
+	head_book.pick_up()
+	desk_book.place()
+	
+	
 func drop_book(book):
 	
 	# save location in the global space for spawn

@@ -1,0 +1,146 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Library/Bookshelf_Space.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Bookshelf/Tall_Bookshelf.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Bookshelf/Bookshelf.tscn" type="PackedScene" id=3]
+
+[node name="Library" type="Spatial"]
+
+[node name="Bookshelfs" type="Spatial" parent="."]
+
+[node name="Back_row" type="Spatial" parent="Bookshelfs"]
+
+[node name="Tall_Bookshelf" parent="Bookshelfs/Back_row" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.26993 )
+
+[node name="Tall_Bookshelf2" parent="Bookshelfs/Back_row" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1.26993 )
+
+[node name="Tall_Bookshelf4" parent="Bookshelfs/Back_row" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1.26993 )
+
+[node name="Tall_Bookshelf5" parent="Bookshelfs/Back_row" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -1.26993 )
+
+[node name="Tall_Bookshelf3" parent="Bookshelfs/Back_row" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -1.26993 )
+
+[node name="Front_row" type="Spatial" parent="Bookshelfs"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.896668, 0, 0 )
+
+[node name="Bookshelf" parent="Bookshelfs/Front_row" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.42829 )
+
+[node name="Bookshelf3" parent="Bookshelfs/Front_row" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6.42829 )
+
+[node name="Bookshelf2" parent="Bookshelfs/Front_row" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6.42829 )
+
+[node name="Side" type="Spatial" parent="Bookshelfs"]
+visible = false
+
+[node name="Bookshelf" parent="Bookshelfs/Side" instance=ExtResource( 3 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 9.59523, 0, 3.15814 )
+
+[node name="Bookshelf_Space" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.10794, 1.05044, -1.48569 )
+
+[node name="Bookshelf_Space2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04333, 1.05044, -1.48569 )
+
+[node name="Bookshelf_Space3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00946712, 1.05044, -1.48569 )
+
+[node name="Bookshelf_Space4" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03863, 1.05044, -1.48569 )
+
+[node name="Bookshelf_Space5" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.06779, 1.05044, -1.48569 )
+
+[node name="Bookshelf_Space6" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.10794, 2.43445, -1.48569 )
+
+[node name="Bookshelf_Space7" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04333, 2.43445, -1.48569 )
+
+[node name="Bookshelf_Space8" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00946712, 2.43445, -1.48569 )
+
+[node name="Bookshelf_Space9" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03863, 2.43445, -1.48569 )
+
+[node name="Bookshelf_Space10" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.06779, 2.43445, -1.48569 )
+
+[node name="Bookshelf_Space11" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.10794, 3.9832, -1.48569 )
+
+[node name="Bookshelf_Space12" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04333, 3.9832, -1.48569 )
+
+[node name="Bookshelf_Space13" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00946712, 3.9832, -1.48569 )
+
+[node name="Bookshelf_Space14" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03863, 3.9832, -1.48569 )
+
+[node name="Bookshelf_Space15" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.06779, 3.9832, -1.48569 )
+
+[node name="Bookshelf_Space16" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.10794, 5.40256, -1.48569 )
+
+[node name="Bookshelf_Space17" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04333, 5.40256, -1.48569 )
+
+[node name="Bookshelf_Space18" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00946712, 5.40256, -1.48569 )
+
+[node name="Bookshelf_Space19" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03863, 5.40256, -1.48569 )
+
+[node name="Bookshelf_Space20" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.06779, 5.40256, -1.48569 )
+
+[node name="Bookshelf_Space21" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.10794, 6.95131, -1.48569 )
+
+[node name="Bookshelf_Space22" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04333, 6.95131, -1.48569 )
+
+[node name="Bookshelf_Space23" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00946712, 6.95131, -1.48569 )
+
+[node name="Bookshelf_Space24" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03863, 6.95131, -1.48569 )
+
+[node name="Bookshelf_Space25" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0324, 6.95131, -1.48569 )
+
+[node name="Bookshelf_Space26" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 0.969778, 0.243987, 0, -0.243987, 0.969778, -4.90439, 1.16086, 6.64997 )
+
+[node name="Bookshelf_Space27" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 0.969778, 0.243987, 0, -0.243987, 0.969778, -0.851592, 1.16086, 6.64997 )
+
+[node name="Bookshelf_Space28" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 0.969778, 0.243987, 0, -0.243987, 0.969778, 3.17757, 1.16086, 6.64997 )
+
+[node name="Bookshelf_Space29" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 0.996081, 0.0884423, 0, -0.0884423, 0.996081, -4.90439, 3.14147, 6.64997 )
+
+[node name="Bookshelf_Space30" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 0.996081, 0.0884423, 0, -0.0884423, 0.996081, -0.851592, 3.14147, 6.64997 )
+
+[node name="Bookshelf_Space31" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 0.996081, 0.0884423, 0, -0.0884423, 0.996081, 3.17757, 3.14147, 6.64997 )
+
+[node name="Bookshelf_Space32" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.90439, 4.94339, 6.64997 )
+
+[node name="Bookshelf_Space33" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.851592, 4.94339, 6.64997 )
+
+[node name="Bookshelf_Space34" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17757, 4.94339, 6.64997 )

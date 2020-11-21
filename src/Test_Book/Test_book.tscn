@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Test_Book/Test_book.gd" type="Script" id=1]
 [ext_resource path="res://models/books/prop_book.obj" type="ArrayMesh" id=2]
@@ -7,24 +7,36 @@
 rough = true
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.8, 1, 0.2 )
+extents = Vector3( 0.48, 0.6, 0.12 )
 
-[node name="TestBook" type="RigidBody" groups=[
-"Books",
-]]
-collision_layer = 12
+[sub_resource type="SphereShape" id=3]
+radius = 1.2
+
+[node name="TestBook" type="RigidBody"]
+collision_layer = 2
 collision_mask = 15
 mass = 10.0
 physics_material_override = SubResource( 1 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.05855e-05, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0241318 )
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.272458, 0, 0 )
 mesh = ExtResource( 2 )
 material/0 = null
 material/1 = null
 material/2 = null
+
+[node name="Area" type="Area" parent="." groups=[
+"Books",
+]]
+monitoring = false
+monitorable = false
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 3 )
