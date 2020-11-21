@@ -53,7 +53,8 @@ func change_camera_view(point : int) -> void:
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
+	AudioManager.stop_sound("menu")
+	
 	match anim_name:
 		"fade_white": get_tree().change_scene("res://levels/Test_Level.tscn")
 		"fade_black": get_tree().quit()
-	
