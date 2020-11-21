@@ -4,8 +4,8 @@ enum Focuses { MAIN, OPTIONS, CREDITS, QUIT }
 
 var focus : int = Focuses.MAIN
 
-onready var camera = $Camera
-onready var camera_tween = $Camera/Tween
+onready var camera = $Camera/Camera
+onready var camera_tween = $Camera/Camera/Tween
 onready var camera_points = $CameraPoints
 onready var paige = $Paige
 onready var paige_anim = $Paige/AnimationPlayer
