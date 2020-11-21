@@ -106,14 +106,6 @@ interact={
  ]
 }
 
-[layer_names]
-
-3d_physics/layer_1="World"
-3d_physics/layer_2="Decoration"
-3d_physics/layer_3="Player"
-3d_physics/layer_4="Interactable"
-3d_physics/layer_5="Ladder"
-
 [rendering]
 
 quality/filters/anisotropic_filter_level=16
