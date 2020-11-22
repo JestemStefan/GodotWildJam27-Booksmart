@@ -44,6 +44,8 @@ func enter_state(new_state):
 		
 		State.SPAWN:
 			
+			customer_type = null
+			
 			randomize()
 			var random = randi()%4
 			var random_customer = [Wizard, Archer, Ninja, Warrior][random]
@@ -58,6 +60,7 @@ func enter_state(new_state):
 				3:
 					customer_type = "Warrior"
 			
+			print(customer_type)
 			var spawn_customer = random_customer.instance()
 			
 			customer.add_child(spawn_customer)
@@ -207,7 +210,8 @@ func _on_Tween_tween_completed(object, key):
 			
 			
 		State.WALK_TO_EXIT:
-			call_deferred("free")
+			customer.get_child(1).call_deferred("free")
+			enter_state(State.SPAWN)
 
 func _on_Customer_Patience_Timer_timeout():
 	match state:
