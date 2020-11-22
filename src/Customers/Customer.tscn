@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="Customer" type="Spatial"]
+
+[node name="Books" type="Spatial" parent="."]
+transform = Transform( 2.65431e-14, -1.62921e-07, -1, -1, -1.62921e-07, 0, -1.62921e-07, 1, -1.62921e-07, 0.494745, 0.649689, 0 )

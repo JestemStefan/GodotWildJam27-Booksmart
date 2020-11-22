@@ -65,5 +65,5 @@ skin = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1985, -0.744227 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1985, -0.835398 )
 shape = SubResource( 3 )
