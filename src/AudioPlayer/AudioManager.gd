@@ -4,7 +4,8 @@ const SIMPLE_AUDIO_PLAYER = preload("res://src/AudioPlayer/SimpleAudioPlayer.tsc
 const AUDIO_PLAYER_3D = preload("res://src/AudioPlayer/3D_Audio_Player.tscn")
 
 var audio_clips = {"ambient": preload("res://assets/Audio/GWJ27_loopable_idea_1.ogg"),
-					"santa_2": preload("res://assets/Audio/SFX/Santas_2.ogg")}
+					"santa_2": preload("res://assets/Audio/SFX/Santas_2.ogg"),
+					"menu": preload("res://assets/Audio/assets_Audio_GWJ27_Menu.ogg")}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,7 +24,8 @@ func play_sound(sound, shouldLoop = false, position = null):
 		if position is Vector3:
 			audio_player = AUDIO_PLAYER_3D.instance()
 			audio_player.play_audio(audio_file)
-			add_child(audio_player)
+			audio_player.name = sound
+			add_child(audio_player, true)
 			audio_player.loop(shouldLoop)
 			audio_player.set_translation(position)
 			
@@ -31,17 +33,33 @@ func play_sound(sound, shouldLoop = false, position = null):
 		elif position is Spatial:
 			audio_player = AUDIO_PLAYER_3D.instance()
 			audio_player.play_audio(audio_file)
-			position.add_child(audio_player)
+			audio_player.name = sound
+			position.add_child(audio_player, true)
 			audio_player.loop(shouldLoop)
 			
 		else:
 			audio_player = SIMPLE_AUDIO_PLAYER.instance()
 			audio_player.play_audio(audio_file)
-			add_child(audio_player)
+			audio_player.name = sound
+			add_child(audio_player, true)
 			audio_player.loop(shouldLoop)
 			
 
 		print("now playing " + sound)
 		
+	else:
+		print("No sound called" + sound + "in library")
+
+
+
+func stop_sound(sound):
+	
+	if audio_clips.has(sound):
+		for audio_player in get_children():
+			if audio_player is AudioStreamPlayer || audio_player is AudioStreamPlayer3D:
+				if audio_player.name == sound:
+					audio_player.stop()
+					audio_player.queue_free()
+	
 	else:
 		print("No sound called" + sound + "in library")

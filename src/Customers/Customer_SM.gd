@@ -4,28 +4,52 @@ extends Spatial
 onready var tween: Tween = $Tween
 onready var desk = get_tree().get_nodes_in_group("Desk")[0]
 
+# Book #
+onready var library:Library = get_tree().get_nodes_in_group("Library")[0]
+onready var book = preload("res://src/Test_Book/Test_book.tscn")
+
 onready var desk_pos: Spatial = $DeskPosition
 onready var exit_pos: Spatial = $ExitPosition
 
 onready var customer: Spatial = $Customer_Wizard
+onready var customer_hand = $Customer_Wizard/Books
 onready var customer_animPlayer: AnimationPlayer = $Customer_Wizard/Wizard/AnimationPlayer
 
 onready var customer_patience: Timer = $Customer_Patience_Timer
+onready var timer: Timer = $Timer
 
 export var WAIT_TIME: int
 
 # Meta #
-enum State {WALK_TO_DESK, GIVE_BOOKS, WAIT, WRONG_BOOK, CORRECT_BOOK, WALK_TO_EXIT}
+enum State {SPAWN, WALK_TO_DESK, GIVE_BOOKS, WAIT, WRONG_BOOK, CORRECT_BOOK, WALK_TO_EXIT, DESPAWN}
 var state : int 
 
 func _ready():
-	state = State.WALK_TO_DESK
-	enter_state(state)
+	timer.start(1)
 
 func enter_state(new_state):
 	
 	state = new_state
 	match state:
+		
+		State.SPAWN:
+			print("Customer spawned")
+			# make a book
+			var generated_book = book.instance()
+			
+			# get customer hand
+			var customer_hand = $Customer_Wizard/Books
+			
+		
+			# add book to it
+			customer_hand.add_child(generated_book)
+			
+			# turn off physics on the book
+			generated_book.set_mode(1)
+			generated_book.place()
+			
+			enter_state(State.WALK_TO_DESK)
+		
 		
 		State.WALK_TO_DESK:
 			print("Walking to desk")
@@ -42,7 +66,25 @@ func enter_state(new_state):
 			customer.look_at(desk_pos.get_global_transform().origin, Vector3.UP)
 			customer_animPlayer.play("Run")
 
-
+		State.GIVE_BOOKS:
+			
+			var customer_book = customer_hand.get_child(0)
+			customer_hand.remove_child(customer_book)
+	
+			# spawn in world
+			desk.get_node("Books").add_child(customer_book)
+			desk._render()
+			
+			# pause physics
+			customer_book.set_mode(1)
+			
+			customer_book.place()
+			
+			print("customer book to desk")
+			
+			enter_state(State.WAIT)
+			
+			
 		State.WAIT:
 			print("Waiting at desk")
 			customer.look_at(desk.get_global_transform().origin, Vector3.UP)
@@ -58,8 +100,10 @@ func enter_state(new_state):
 			
 			
 		State.WRONG_BOOK:
-			pass
+			print("Wrong book")
+			change_animation("Book_Bad")
 			
+			customer_patience.start(1)
 			
 		State.WALK_TO_EXIT:
 			print("Walking to exit")
@@ -101,9 +145,11 @@ func change_animation(anim_name):
 
 
 func _on_Tween_tween_completed(object, key):
+	
 	match state:
 		State.WALK_TO_DESK:
-			enter_state(State.WAIT)
+			enter_state(State.GIVE_BOOKS)
+			
 			
 		State.WALK_TO_EXIT:
 			call_deferred("free")
@@ -111,7 +157,11 @@ func _on_Tween_tween_completed(object, key):
 func _on_Customer_Patience_Timer_timeout():
 	match state:
 		State.WAIT:
-			enter_state(State.CORRECT_BOOK)
+			enter_state(State.WRONG_BOOK)
 			
-		State.CORRECT_BOOK:
-			enter_state(State.WALK_TO_EXIT)
+		State.WRONG_BOOK:
+			enter_state(State.WAIT)
+
+
+func _on_Timer_timeout():
+	enter_state(State.SPAWN)
