@@ -23,6 +23,7 @@ func _ready() -> void:
 	camera.translation = camera_points.get_node("0").translation
 	camera.rotation_degrees = camera_points.get_node("0").rotation_degrees
 	
+	main.visible = true
 	credits.visible = false
 	settings.visible = false
 	overlay.visible = false
