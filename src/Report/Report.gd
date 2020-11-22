@@ -49,15 +49,15 @@ func start_score_count() -> void:
 	AudioManager.play_sound("party")
 	AudioManager.play_sound("applause")
 	
-	if StaticData.score in range(0, 25):
+	if GameState.score in range(0, 25):
 		report.text += "Congratz! You failed!"
-	elif StaticData.score in range(25, 50):
+	elif GameState.score in range(25, 50):
 		report.text += "You tried!"
-	elif StaticData.score in range(50, 150):
+	elif GameState.score in range(50, 150):
 		report.text += "Quite good!"
-	elif StaticData.score in range(150, 190):
+	elif GameState.score in range(150, 190):
 		report.text += "Superb!"
-	elif StaticData.score in range(190, 230):
+	elif GameState.score in range(190, 230):
 		report.text += "Spectacular!"
 	else:
 		report.text += "Masterful!"
@@ -66,6 +66,8 @@ func start_score_count() -> void:
 	
 	animation_player.play("fade_in")
 	fade.visible = true
+	
+	GameState.score = 0
 	
 	AudioManager.stop_sound("party")
 	AudioManager.stop_sound("applause")
