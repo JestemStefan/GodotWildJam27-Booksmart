@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Gwj 27"
+config/name="BooksMart"
 run/main_scene="res://levels/Intro.tscn"
 boot_splash/image="res://assets/2D/splash.png"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
