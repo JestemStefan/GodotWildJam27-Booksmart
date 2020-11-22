@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/GWJ27_Menu.ogg-c892fb1164b8b60556e773670ece167a.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/GWJ27_Menu.ogg"
+dest_files=[ "res://.import/GWJ27_Menu.ogg-c892fb1164b8b60556e773670ece167a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
