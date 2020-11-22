@@ -43,11 +43,11 @@ vertices = PoolVector3Array( -10.0175, 0.43322, 3.37701, -8.2175, 0.43322, 3.377
 polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 4, 3, 5 ), PoolIntArray( 5, 3, 6 ), PoolIntArray( 8, 7, 9 ), PoolIntArray( 9, 7, 10 ), PoolIntArray( 12, 11, 13 ), PoolIntArray( 13, 11, 14 ), PoolIntArray( 16, 15, 17 ), PoolIntArray( 17, 15, 18 ), PoolIntArray( 22, 21, 19 ), PoolIntArray( 19, 21, 20 ), PoolIntArray( 26, 25, 23 ), PoolIntArray( 23, 25, 24 ), PoolIntArray( 30, 29, 27 ), PoolIntArray( 27, 29, 28 ), PoolIntArray( 34, 33, 31 ), PoolIntArray( 31, 33, 32 ), PoolIntArray( 38, 37, 35 ), PoolIntArray( 35, 37, 36 ) ]
 agent/height = 1.0
 
-[sub_resource type="SpatialMaterial" id=10]
+[sub_resource type="SpatialMaterial" id=9]
 albedo_color = Color( 0.341176, 0, 0, 1 )
 
-[sub_resource type="CubeMesh" id=9]
-material = SubResource( 10 )
+[sub_resource type="CubeMesh" id=10]
+material = SubResource( 9 )
 size = Vector3( 21.235, 2, 10.895 )
 
 [sub_resource type="CubeMesh" id=11]
@@ -70,6 +70,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.192, 0.116778, 2.009 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.68712 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Level_Assets/Floor_Walls/Floor"]
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = SubResource( 1 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Level_Assets/Floor_Walls/Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.1556, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
 material/0 = SubResource( 1 )
@@ -184,7 +190,7 @@ navmesh = SubResource( 8 )
 [node name="MeshInstance" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.96678, 4.32451 )
 visible = false
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]

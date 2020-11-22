@@ -1,6 +1,8 @@
 extends Node
 
 var score: int
+var play_music := true
+var skip_intro := false
 
 func _ready():
 	score = 0
