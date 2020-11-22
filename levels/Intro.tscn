@@ -1,0 +1,162 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/Intro/Intro.gd" type="Script" id=1]
+[ext_resource path="res://assets/2D/gwj-27-theme.png" type="Texture" id=2]
+[ext_resource path="res://assets/2D/gwj-27-wc-2.png" type="Texture" id=3]
+[ext_resource path="res://assets/2D/gwj-27-wc-3.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4, 9, 11 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Theme:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4.5, 5.5, 9, 11 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Wildcard1:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 5, 6, 9, 11 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Wildcard2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 5.6, 6.5, 9, 11 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Theme:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 4.5, 5.5, 9 ),
+"transitions": PoolRealArray( 0.420448, 0.420448, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 260, 480 ), Vector2( 260, 480 ), Vector2( 260, 480 ), Vector2( 260, 480 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Wildcard1:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 5, 6, 9 ),
+"transitions": PoolRealArray( 1, 0.42, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 806, -4 ), Vector2( 806, -4 ), Vector2( 588, 28 ), Vector2( 588, 28 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Wildcard2:rect_position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 5.6, 6.5, 9 ),
+"transitions": PoolRealArray( 1, 0.42, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 806, -4 ), Vector2( 806, -4 ), Vector2( 1024, 28 ), Vector2( 1024, 28 ) ]
+}
+
+[node name="Intro" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 1 )
+
+[node name="Theme" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -28.0
+margin_right = 60.0
+margin_bottom = 232.001
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wildcard1" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -372.0
+margin_top = -512.0
+margin_right = 508.0
+margin_bottom = 688.0
+rect_scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wildcard2" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.666667 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 48.0613
+margin_top = -514.34
+margin_right = 928.061
+margin_bottom = 685.66
+rect_scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 4 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

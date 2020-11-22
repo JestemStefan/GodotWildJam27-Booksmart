@@ -23,7 +23,6 @@ func _ready() -> void:
 	
 	settings.visible = false
 	overlay.visible = false
-	AudioManager.play_sound("menu", true)
 	paige_anim.play("Idle_Books")
 
 
