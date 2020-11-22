@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://models/floortiles/floortile_wood_level.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://src/Customers/CustomerManager.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Timer/Timer.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Score/Score.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/Barrel/Barrel.tscn" type="PackedScene" id=16]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
@@ -36,6 +37,21 @@ extents = Vector3( 11.9282, 2.73824, 1 )
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.698316, 3.5527, 6.86403 )
+
+[sub_resource type="NavigationMesh" id=8]
+vertices = PoolVector3Array( -10.0175, 0.43322, 3.37701, -8.2175, 0.43322, 3.37701, -7.9175, 0.43322, 2.77701, -10.0175, 0.43322, -0.522993, -10.0175, 0.43322, 3.37701, -7.9175, 0.43322, 2.77701, -2.8175, 0.43322, -0.522993, 4.0825, 0.43322, 2.77701, 4.3825, 0.43322, -0.522993, -2.8175, 0.43322, -0.522993, -7.9175, 0.43322, 2.77701, 4.3825, 0.43322, -0.522993, 4.0825, 0.43322, 2.77701, 6.1825, 0.43322, 3.07701, 10.0825, 0.43322, -0.522993, -7.9175, 0.43322, 7.57701, -8.2175, 0.43322, 3.37701, -10.0175, 0.43322, 3.37701, -10.0175, 0.43322, 9.07701, -0.1175, 0.43322, 9.07701, 10.0825, 0.43322, 9.07701, 5.8825, 0.43322, 7.57701, -1.0175, 0.43322, 7.57701, -7.9175, 0.43322, 7.57701, -10.0175, 0.43322, 9.07701, -0.1175, 0.43322, 9.07701, -1.0175, 0.43322, 7.57701, 10.0825, 0.43322, 9.07701, 10.0825, 0.43322, -0.522993, 6.1825, 0.43322, 3.07701, 5.8825, 0.43322, 7.57701, -7.0175, 6.43322, 3.97701, -7.0175, 6.43322, 6.37701, 4.9825, 6.43322, 6.37701, 4.9825, 6.43322, 3.97701, -6.7175, 0.43322, 4.27701, -6.7175, 0.43322, 6.07701, 4.6825, 0.43322, 6.07701, 4.6825, 0.43322, 4.27701 )
+polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 4, 3, 5 ), PoolIntArray( 5, 3, 6 ), PoolIntArray( 8, 7, 9 ), PoolIntArray( 9, 7, 10 ), PoolIntArray( 12, 11, 13 ), PoolIntArray( 13, 11, 14 ), PoolIntArray( 16, 15, 17 ), PoolIntArray( 17, 15, 18 ), PoolIntArray( 22, 21, 19 ), PoolIntArray( 19, 21, 20 ), PoolIntArray( 26, 25, 23 ), PoolIntArray( 23, 25, 24 ), PoolIntArray( 30, 29, 27 ), PoolIntArray( 27, 29, 28 ), PoolIntArray( 34, 33, 31 ), PoolIntArray( 31, 33, 32 ), PoolIntArray( 38, 37, 35 ), PoolIntArray( 35, 37, 36 ) ]
+agent/height = 1.0
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_color = Color( 0.341176, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=9]
+material = SubResource( 10 )
+size = Vector3( 21.235, 2, 10.895 )
+
+[sub_resource type="CubeMesh" id=11]
+size = Vector3( 12.758, 6, 3.272 )
 
 [node name="Test_Level" type="Spatial"]
 
@@ -157,6 +173,29 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6133, 0, 0.285017 )
 [node name="Timer" parent="." instance=ExtResource( 14 )]
 
 [node name="Score" parent="." instance=ExtResource( 15 )]
+
+[node name="Navigation" type="Navigation" parent="." groups=[
+"Navigation",
+]]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
+navmesh = SubResource( 8 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.96678, 4.32451 )
+visible = false
+mesh = SubResource( 9 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.966038, 3.16126, 5.054 )
+visible = false
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="Barrel" parent="Navigation" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.71158, 0, 8.04553 )
+speed = 3
 [connection signal="book_placed" from="Desk" to="CustomerManager" method="_on_Desk_book_placed"]
 
 [editable path="CustomerManager"]
