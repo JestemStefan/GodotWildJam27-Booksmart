@@ -10,7 +10,7 @@ onready var antisotropic_label := $VBoxContainer/VBoxContainer/Antisotropic/Labe
 onready var environment_options := $VBoxContainer/VBoxContainer/Environment/EnvironmentOptions
 onready var environment_label := $VBoxContainer/VBoxContainer/Environment/Label
 
-onready var apply_button := $VBoxContainer/VBoxContainer/ApplyButton
+onready var apply_button := $VBoxContainer/ApplyButton
 
 
 
