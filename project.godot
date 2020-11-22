@@ -55,6 +55,7 @@ config/icon="res://assets/2D/icon.png"
 FileManager="*res://src/FileManager/FileManager.gd"
 AudioManager="*res://src/AudioPlayer/AudioManager.gd"
 StaticData="*res://src/StaticData/StaticData.gd"
+GameState="*res://src/GameState/GameState.gd"
 
 [display]
 

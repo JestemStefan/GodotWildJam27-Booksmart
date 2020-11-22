@@ -11,5 +11,5 @@ dest_files=[ "res://.import/GWJ27_Music_V4.ogg-f855963d3511054db9209ab5f804f995.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

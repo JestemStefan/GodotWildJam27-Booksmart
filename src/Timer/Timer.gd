@@ -1,9 +1,12 @@
 extends Control
 
-export var round_time := 180
+export var round_time := 20
 
-onready var timer = $Timer
-onready var display = $Display
+onready var timer := $Timer
+onready var whistle_timer := $WhistleTimer
+onready var display := $Display
+onready var fade_control := $CanvasLayer/Control
+onready var fade_animation := $CanvasLayer/Control/AnimationPlayer
 
 signal timer_up
 
@@ -30,6 +33,7 @@ func as_string_time(time : float) -> String:
 
 
 func _ready() -> void:
+	fade_control.visible = false
 	self.connect("timer_up", GameState, "_timer_up")
 	timer.wait_time = round_time
 	timer.start()
@@ -41,3 +45,13 @@ func _process(_delta) -> void:
 	if !timer.time_left:
 		set_process(false)
 		emit_signal("timer_up")
+		
+		whistle_timer.start()
+		yield(whistle_timer, "timeout")
+		
+		fade_animation.play("fade")
+		fade_control.visible = true
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	get_tree().change_scene("res://levels/Report.tscn")
