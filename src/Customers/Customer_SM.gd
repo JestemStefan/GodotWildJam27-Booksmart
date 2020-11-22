@@ -272,6 +272,7 @@ func _on_Desk_book_placed():
 				GameState.add_points(25)
 				
 				desk.enable_particles("stars", true)
+				AudioManager.play_sound("book_sparkle", false, desk)
 				desk.enable_particles("particles", false)
 				
 				book_ordered = null
