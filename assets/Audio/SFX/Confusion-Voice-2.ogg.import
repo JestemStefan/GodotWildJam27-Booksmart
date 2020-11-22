@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Confusion-Voice-2.ogg-f207353ed21af1382a39c623374a65
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

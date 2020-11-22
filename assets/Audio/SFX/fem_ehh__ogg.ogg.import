@@ -11,5 +11,5 @@ dest_files=[ "res://.import/fem_ehh__ogg.ogg-bebb365bba71ecffeeb437f3bbb5d614.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

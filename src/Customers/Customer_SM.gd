@@ -149,13 +149,39 @@ func enter_state(new_state):
 			print("Correct book")
 			change_animation("Book_Good")
 			
+			match customer_type:
+				"Wizard":
+					AudioManager.play_sound("wizard_good", false, customer)
+				
+				"Warrior":
+					AudioManager.play_sound("warrior_good", false, customer)
+				
+				"Ninja":
+					AudioManager.play_sound("ninja_good", false, customer)
+				
+				"Archer":
+					AudioManager.play_sound("archer_good", false, customer)
+			
 			customer_patience.start(1)
 			
 			
 		State.WRONG_BOOK:
 			print("Wrong book")
 			change_animation("Book_Bad")
-			AudioManager.play_sound("wizard_fail")
+			
+			match customer_type:
+				"Wizard":
+					AudioManager.play_sound("wizard_fail", false, customer)
+				
+				"Warrior":
+					AudioManager.play_sound("warrior_fail", false, customer)
+					
+				"Ninja":
+					AudioManager.play_sound("ninja_fail", false, customer)
+				
+				"Archer":
+					AudioManager.play_sound("archer_fail", false, customer)
+			
 			
 			customer_patience.start(1)
 			

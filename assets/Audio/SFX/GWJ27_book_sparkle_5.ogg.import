@@ -11,5 +11,5 @@ dest_files=[ "res://.import/GWJ27_book_sparkle_5.ogg-dbc96814a7acfd2c7494c2710ea
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
