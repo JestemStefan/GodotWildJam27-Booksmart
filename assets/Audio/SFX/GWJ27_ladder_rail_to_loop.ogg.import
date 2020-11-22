@@ -11,5 +11,5 @@ dest_files=[ "res://.import/GWJ27_ladder_rail_to_loop.ogg-8869944d597cd8d59fe280
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Santas-3.ogg-a0f7c8a2538b41661499896876bade8a.oggstr
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

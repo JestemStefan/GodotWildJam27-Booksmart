@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Affirmative_Voice_3.ogg-320e5dca3a69275824410067ffa1
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

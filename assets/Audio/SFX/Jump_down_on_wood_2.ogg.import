@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Jump_down_on_wood_2.ogg-d3d7cfc81f5d92074fe1e50dcab5
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

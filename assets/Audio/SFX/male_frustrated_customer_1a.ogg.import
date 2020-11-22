@@ -11,5 +11,5 @@ dest_files=[ "res://.import/male_frustrated_customer_1a.ogg-c52f6be8b85f19d6ea36
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/ladder_sound_1.ogg-e289aa7691fe5a128815892bb4613143.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

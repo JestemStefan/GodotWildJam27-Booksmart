@@ -11,5 +11,5 @@ dest_files=[ "res://.import/assets_Audio_GWJ27_Menu.ogg-2f01d4b84c9d3e679d335fd0
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
