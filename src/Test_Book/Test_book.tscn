@@ -40,3 +40,6 @@ collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 3 )
+
+[node name="Particles" type="Particles" parent="."]
+visibility_aabb = AABB( -2.06648, -2.04394, -1.83739, 4.13296, 4.08788, 3.67477 )

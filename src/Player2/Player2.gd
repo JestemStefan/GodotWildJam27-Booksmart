@@ -61,6 +61,7 @@ func process_input(delta : float) -> void:
 				
 				if interact_ray.is_colliding():
 					var picked_object = interact_ray.get_collider()
+					print(picked_object)
 					match picked_object.get_groups()[0]:
 
 						"Books":
@@ -81,6 +82,7 @@ func process_input(delta : float) -> void:
 						"Bookshelfs":
 							
 							print("Bookshelf")
+							
 							
 							var selected_bookshelf = picked_object
 
@@ -233,6 +235,7 @@ func process_input(delta : float) -> void:
 					
 					#save collider and check what it is
 					var picked_object = interact_ray.get_collider()
+					print(picked_object)
 					match picked_object.get_groups()[0]:
 
 						"Books":
@@ -273,7 +276,7 @@ func process_input(delta : float) -> void:
 								else:
 									pass
 									
-							elif selected_bookshelf.state == 1:  # Taken
+							elif selected_bookshelf.state == 1 or selected_bookshelf.state == 3:  # Taken
 								
 								var book_on_shelf = selected_bookshelf.get_node("BookPosition").get_child(0)
 								
@@ -379,13 +382,21 @@ func pick_up_book(book):
 
 
 
-func book_to_shelf(book, bookshelf):
+func book_to_shelf(book: Book, bookshelf):
 	
 	book_storage.remove_child(book)
 	
+	if bookshelf == book.desired_bookshelf:
+		book.desired_bookshelf = null
+		bookshelf.stars()
+		bookshelf.enter_state(1) # 1 means taken
+		
+	else:
+		bookshelf.enter_state(3) # 1 means taken, but ordered
+		
 	# spawn in world
 	bookshelf.get_node("BookPosition").add_child(book)
-	bookshelf.enter_state(1) # 1 means taken
+	
 	
 	# reset translation and rotation
 	book.translation = Vector3.ZERO
@@ -395,6 +406,8 @@ func book_to_shelf(book, bookshelf):
 	book.set_mode(1)
 	
 	book.place()
+	
+	
 	
 	print("book to shelf")
 
@@ -407,7 +420,15 @@ func shelf_to_player(bookshelf, book):
 	
 	# spawn in world
 	book_storage.add_child(book)
-	bookshelf.enter_state(0) # 1 means Free
+	
+	if bookshelf.state == 1: # ordered
+		bookshelf.enter_state(0) # 1 means Free
+	
+	elif bookshelf.state == 3: # ordered taken
+		bookshelf.enter_state(2) # 1 means ordered free
+		
+	else:
+		pass
 	
 	# reset translation and rotation
 	book.translation = Vector3.ZERO

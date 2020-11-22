@@ -21,7 +21,6 @@ func _ready() -> void:
 	randomize()
 	apply_material()
 	state = State.FREE
-	set_desired_bookshelf()
 
 
 func pick_up() -> void:
@@ -81,5 +80,6 @@ func apply_material() -> void:
 
 func set_desired_bookshelf():
 	desired_bookshelf = library.get_free_bookshelf()
+	print(desired_bookshelf)
 	desired_bookshelf.enter_state(2)
 	library.update_library()

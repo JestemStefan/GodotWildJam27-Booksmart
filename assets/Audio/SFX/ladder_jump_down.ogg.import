@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ladder_jump_down.ogg-806a4bf08fb546c554548266b9aa4d67.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/ladder_jump_down.ogg"
+dest_files=[ "res://.import/ladder_jump_down.ogg-806a4bf08fb546c554548266b9aa4d67.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
