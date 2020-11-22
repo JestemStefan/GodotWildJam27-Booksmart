@@ -45,7 +45,6 @@ _global_script_class_icons={
 [application]
 
 config/name="Gwj 27"
-run/main_scene="res://levels/Main_Menu.tscn"
 config/icon="res://assets/2D/icon.png"
 
 [autoload]
@@ -53,6 +52,7 @@ config/icon="res://assets/2D/icon.png"
 FileManager="*res://src/FileManager/FileManager.gd"
 AudioManager="*res://src/AudioPlayer/AudioManager.gd"
 StaticData="*res://src/StaticData/StaticData.gd"
+GameState="*res://src/GameState/GameState.gd"
 
 [display]
 
