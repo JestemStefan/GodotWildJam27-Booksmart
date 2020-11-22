@@ -3,13 +3,12 @@
 [ext_resource path="res://src/Story/Story.gd" type="Script" id=1]
 [ext_resource path="res://assets/Fonts/Uncontrolled Emotions.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "in"
-length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Text:modulate")
 tracks/0/interp = 1
@@ -17,14 +16,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "in_out"
+[sub_resource type="Animation" id=3]
 length = 8.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Text:modulate")
@@ -41,7 +39,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "out"
-length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Text:modulate")
 tracks/0/interp = 1
@@ -49,7 +46,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
@@ -75,7 +72,7 @@ __meta__ = {
 }
 
 [node name="Text" type="Label" parent="."]
-modulate = Color( 0, 0, 0, 0 )
+modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -86,7 +83,7 @@ margin_right = 469.0
 margin_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 align = 1
 valign = 1
 autowrap = true
@@ -95,8 +92,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/in = SubResource( 3 )
-anims/in_out = SubResource( 1 )
+anims/in = SubResource( 2 )
+anims/in_out = SubResource( 3 )
 anims/out = SubResource( 4 )
 
 [node name="hint" type="Label" parent="."]
