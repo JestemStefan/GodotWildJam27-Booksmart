@@ -21,6 +21,7 @@ onready var Archer = preload("res://src/Customers/Archer.tscn")
 onready var Ninja = preload("res://src/Customers/Ninja.tscn")
 onready var Warrior = preload("res://src/Customers/Warrior.tscn")
 
+var customer_type
 onready var customer_hand = $Customer/Books
 onready var customer_animPlayer: AnimationPlayer
 
@@ -44,7 +45,19 @@ func enter_state(new_state):
 		State.SPAWN:
 			
 			randomize()
-			var random_customer = [Wizard, Archer, Ninja, Warrior][randi() % 4]
+			var random = randi()%4
+			var random_customer = [Wizard, Archer, Ninja, Warrior][random]
+			
+			match random:
+				0:
+					customer_type = "Wizard"
+				1:
+					customer_type = "Archer"
+				2:
+					customer_type = "Ninja"
+				3:
+					customer_type = "Warrior"
+			
 			var spawn_customer = random_customer.instance()
 			
 			customer.add_child(spawn_customer)
