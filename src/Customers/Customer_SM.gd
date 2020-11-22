@@ -44,6 +44,9 @@ func enter_state(new_state):
 			# add book to it
 			customer_hand.add_child(generated_book)
 			
+			# get free place for this book
+			generated_book.set_desired_bookshelf()
+			
 			# turn off physics on the book
 			generated_book.set_mode(1)
 			generated_book.place()
@@ -90,6 +93,8 @@ func enter_state(new_state):
 			customer.look_at(desk.get_global_transform().origin, Vector3.UP)
 			change_animation("Idle")
 			customer_patience.start(WAIT_TIME)
+			
+			var book_and_shelf = library.get_book_from_library()
 		
 		
 		State.CORRECT_BOOK:
