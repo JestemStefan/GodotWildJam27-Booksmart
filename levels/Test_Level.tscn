@@ -139,7 +139,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.827157 )
 [node name="LadderShort" parent="." groups=[
 "Ladder",
 ] instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.02885 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.87146 )
 
 [node name="CustomerManager" parent="." instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.1652 )
@@ -149,9 +149,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5197, 0, 0.395954 )
 
 [node name="ExitPosition" parent="CustomerManager" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6133, 0, 0.285017 )
-
-[node name="Customer_Wizard" parent="CustomerManager" index="4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5889, 0, 0 )
 
 [node name="Library" parent="." instance=ExtResource( 7 )]
 [connection signal="book_placed" from="Desk" to="CustomerManager" method="_on_Desk_book_placed"]

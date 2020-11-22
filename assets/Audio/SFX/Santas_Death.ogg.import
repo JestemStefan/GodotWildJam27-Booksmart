@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Santas_Death.ogg-2cf4d3f83af531fd9802bbcbabf49e62.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
