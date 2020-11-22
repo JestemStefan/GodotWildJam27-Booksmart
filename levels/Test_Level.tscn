@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://models/floortiles/floortile_wood_level.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://src/Timer/Timer.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Score/Score.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Barrel/Barrel.tscn" type="PackedScene" id=16]
+[ext_resource path="res://levels/Test_Level.gd" type="Script" id=17]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
@@ -54,6 +55,7 @@ size = Vector3( 21.235, 2, 10.895 )
 size = Vector3( 12.758, 6, 3.272 )
 
 [node name="Test_Level" type="Spatial"]
+script = ExtResource( 17 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.58374, 0.811941, 0, -0.811941, 0.58374, 0, 19.7471, 16.3137 )
@@ -149,7 +151,7 @@ transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 11.4085
 
 [node name="Desk" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.3461 )
-desk_capacity = 3
+desk_capacity = 10
 
 [node name="Ladder" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.827157 )
