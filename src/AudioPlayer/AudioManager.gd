@@ -5,7 +5,11 @@ const AUDIO_PLAYER_3D = preload("res://src/AudioPlayer/3D_Audio_Player.tscn")
 
 var audio_clips = {"ambient": preload("res://assets/Audio/GWJ27_loopable_idea_1.ogg"),
 					"wizard_fail": preload("res://assets/Audio/SFX/Santas_Death.ogg"),
-					"menu": preload("res://assets/Audio/assets_Audio_GWJ27_Menu.ogg")}
+					"menu": preload("res://assets/Audio/assets_Audio_GWJ27_Menu.ogg"),
+					"party": preload("res://assets/Audio/Party-blower.ogg"),
+					"applause": preload("res://assets/Audio/mixkit-auditorium-moderate-appla.ogg"),
+					"main": preload("res://assets/Audio/GWJ27_Music_V4.ogg"),
+					"whistle": preload("res://assets/Audio/SFX/referee-blowing-whistle-sound-effect.ogg")}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

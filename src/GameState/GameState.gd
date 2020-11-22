@@ -20,5 +20,5 @@ func update_score():
 func _timer_up():
 	print("Time out")
 	
-	#TODO
-	#Enter rating screen
+	AudioManager.play_sound("whistle")
+	yield(get_tree().create_timer(3), "timeout")

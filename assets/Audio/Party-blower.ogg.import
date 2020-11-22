@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Party-blower.ogg-869192987d074bdbf4c74682d9cb368d.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/Party-blower.ogg"
+dest_files=[ "res://.import/Party-blower.ogg-869192987d074bdbf4c74682d9cb368d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
