@@ -60,11 +60,12 @@ func update_library():
 			1: # Taken
 				all_taken_bookshelfs.append(bookshelf)
 				
-			2: # Ordered
+			2: # Ordered Free
 				all_ordered_bookshelfs.append(bookshelf)
 			
-			3:
+			3: # ordered taken
 				all_ordered_bookshelfs.append(bookshelf)
+				#all_taken_bookshelfs.append(bookshelf)
 				
 #	print("Free space: " + str(all_free_bookshelfs.size()))
 #	print(all_free_bookshelfs)
@@ -120,8 +121,8 @@ func spawn_book():
 		# add book to it
 		empty_bookshelf.get_node("BookPosition").add_child(generated_book)
 		
-		### ROMOVE THIS LATER##########
-		generated_book.set_desired_bookshelf()
+#		### ROMOVE THIS LATER##########
+#		generated_book.set_desired_bookshelf()
 		
 		# turn off physics on the book
 		generated_book.set_mode(1)

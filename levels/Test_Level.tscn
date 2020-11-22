@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://models/floortiles/floortile_wood_level.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
@@ -6,7 +6,8 @@
 [ext_resource path="res://models/level_misc/level_walls.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://models/level_misc/stonewood_texture.png" type="Texture" id=5]
 [ext_resource path="res://models/level_misc/level_windows-shelf.obj" type="ArrayMesh" id=6]
-[ext_resource path="res://src/Library/Library.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Library/Library_small.tscn" type="PackedScene" id=7]
+[ext_resource path="res://models/ladder/Short_Ladder.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Desk/Desk.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Ladder/Ladder.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Decorations/WallTorch.tscn" type="PackedScene" id=11]
@@ -135,6 +136,11 @@ desk_capacity = 3
 [node name="Ladder" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.827157 )
 
+[node name="LadderShort" parent="." groups=[
+"Ladder",
+] instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.02885 )
+
 [node name="CustomerManager" parent="." instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.1652 )
 
@@ -148,6 +154,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6133, 0, 0.285017 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5889, 0, 0 )
 
 [node name="Library" parent="." instance=ExtResource( 7 )]
-book_in_library = 17
+[connection signal="book_placed" from="Desk" to="CustomerManager" method="_on_Desk_book_placed"]
 
 [editable path="CustomerManager"]

@@ -28,6 +28,8 @@ onready var book_storage: Spatial = $GimbalX/BookStorage
 export var book_capacity: int
 onready var library:Library = get_tree().get_nodes_in_group("Library")[0]
 
+onready var desk: Desk = get_tree().get_nodes_in_group("Desk")[0]
+
 
 func _ready() -> void:
 	state = State.DEFAULT
@@ -102,7 +104,7 @@ func process_input(delta : float) -> void:
 								else:
 									pass
 									
-							elif selected_bookshelf.state == 1:  # Taken
+							elif selected_bookshelf.state == 1 or selected_bookshelf.state == 3:  # Taken
 								
 								var book_on_shelf = selected_bookshelf.get_node("BookPosition").get_child(0)
 								
@@ -264,7 +266,7 @@ func process_input(delta : float) -> void:
 							
 							
 							
-							if selected_bookshelf.state == 0 or selected_bookshelf.state == 2:  #Free
+							if selected_bookshelf.state == 0 or selected_bookshelf.state == 2:  #Free or ordered free
 								if stored_books.size() > 0: # if there are books on head
 									
 									# get book from the bottom
@@ -276,7 +278,7 @@ func process_input(delta : float) -> void:
 								else:
 									pass
 									
-							elif selected_bookshelf.state == 1 or selected_bookshelf.state == 3:  # Taken
+							elif selected_bookshelf.state == 1 or selected_bookshelf.state == 3:  # Taken(1) or taken_and_ordered(3)
 								
 								var book_on_shelf = selected_bookshelf.get_node("BookPosition").get_child(0)
 								
@@ -336,7 +338,7 @@ func process_movement(delta : float) -> void:
 			
 
 		State.LADDER:
-
+			
 			var vel = Vector3.ZERO
 			
 			vel.y = -direction.y * 0.1
@@ -352,14 +354,27 @@ func process_movement(delta : float) -> void:
 			else:
 				change_animation("STOP")
 				
+				
+			var clamp_x = [0,0]
+			var clamp_y = [0,0]
+			match ladder.get_name():
+				
+				"Ladder":
+					clamp_x = [-9, 9]
+					clamp_y = [0.1, 7]
+					
+				"LadderShort":
+					clamp_x = [-6, 4]
+					clamp_y = [0.1, 4.5]
+			
 			#left right
 			ladder.translate(Vector3(vel.x, 0, 0))
-			ladder.translation.x = clamp(ladder.translation.x, -9, 9)
+			ladder.translation.x = clamp(ladder.translation.x, clamp_x[0], clamp_x[1])
 			translation.x = ladder.translation.x
 			
 			#up down
 			translate(Vector3(0, vel.y, 0))
-			translation.y = clamp(translation.y, 0.1, 7)
+			translation.y = clamp(translation.y, clamp_y[0], clamp_y[1])
 
 
 
@@ -388,6 +403,7 @@ func book_to_shelf(book: Book, bookshelf):
 	
 	if bookshelf == book.desired_bookshelf:
 		book.desired_bookshelf = null
+		GameState.add_points(10)
 		bookshelf.stars()
 		bookshelf.enter_state(1) # 1 means taken
 		
@@ -449,6 +465,7 @@ func book_to_desk(desk, book):
 	# spawn in world
 	desk.add_child(book)
 	desk.get_parent()._render()
+	desk.get_parent().emit_signal("book_placed")
 	
 	# pause physics
 	book.set_mode(1)
@@ -513,6 +530,7 @@ func switch_books_desk(desk, head_book, desk_book):
 	
 	desk.add_child(head_book)
 	desk._render()
+	desk.emit_signal("book_placed")
 	
 	#pause physics MODE_STATIC
 	head_book.set_mode(1)
@@ -554,7 +572,29 @@ func update_book_stack():
 		var bottom_book: Book = book_storage.get_child(0)
 	
 		var bottom_book_desired_spot = bottom_book.desired_bookshelf
-		library.mark_spot(bottom_book_desired_spot)
+		
+		if bottom_book_desired_spot != null:
+			library.mark_spot(bottom_book_desired_spot)
+			
+			
+		else:
+			library.disable_markers()
+			match bottom_book.state:
+				
+				0: # Free
+					desk.enable_particles("particles", false)
+					
+				
+				1: # Ordered
+					desk.enable_particles("particles", true)
+				
+				2: # Rented
+					desk.enable_particles("particles", false)
+					
+				
+				3: # Orphan
+					desk.enable_particles("particles", false)
+				
 		
 	else:
 		library.disable_markers()

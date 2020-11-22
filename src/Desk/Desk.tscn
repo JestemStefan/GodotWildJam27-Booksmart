@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Desk/Desk.gd" type="Script" id=1]
 [ext_resource path="res://models/countertop/prop_countertop.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://models/countertop/countertop_d.png" type="Texture" id=3]
+[ext_resource path="res://models/Particles/Crystals/Particles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://models/Particles/Star/Stars.tscn" type="PackedScene" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
@@ -29,3 +31,9 @@ shape = SubResource( 2 )
 
 [node name="Books" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.382292, 1.20839, 0 )
+
+[node name="Particles" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61017, 0 )
+
+[node name="Stars" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 1.34035, 0 )

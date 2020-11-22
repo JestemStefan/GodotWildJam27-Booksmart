@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Test_Book/Test_book.gd" type="Script" id=1]
 [ext_resource path="res://models/books/prop_book.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://models/Particles/Crystals/Particles.tscn" type="PackedScene" id=3]
 
 [sub_resource type="PhysicsMaterial" id=1]
 rough = true
@@ -41,5 +42,4 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 3 )
 
-[node name="Particles" type="Particles" parent="."]
-visibility_aabb = AABB( -2.06648, -2.04394, -1.83739, 4.13296, 4.08788, 3.67477 )
+[node name="Particles" parent="." instance=ExtResource( 3 )]

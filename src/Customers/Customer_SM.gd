@@ -2,11 +2,13 @@ extends Spatial
 
 # Tween #
 onready var tween: Tween = $Tween
-onready var desk = get_tree().get_nodes_in_group("Desk")[0]
+onready var desk: Desk = get_tree().get_nodes_in_group("Desk")[0]
 
 # Book #
 onready var library:Library = get_tree().get_nodes_in_group("Library")[0]
 onready var book = preload("res://src/Test_Book/Test_book.tscn")
+
+var book_ordered: Book
 
 onready var desk_pos: Spatial = $DeskPosition
 onready var exit_pos: Spatial = $ExitPosition
@@ -21,7 +23,7 @@ onready var timer: Timer = $Timer
 export var WAIT_TIME: int
 
 # Meta #
-enum State {SPAWN, WALK_TO_DESK, GIVE_BOOKS, WAIT, WRONG_BOOK, CORRECT_BOOK, WALK_TO_EXIT, DESPAWN}
+enum State {SPAWN, WALK_TO_DESK, GIVE_BOOKS, ORDER_BOOK, WAIT, WRONG_BOOK, CORRECT_BOOK, WALK_TO_EXIT, DESPAWN}
 var state : int 
 
 func _ready():
@@ -43,6 +45,7 @@ func enter_state(new_state):
 		
 			# add book to it
 			customer_hand.add_child(generated_book)
+			generated_book.enter_state(2)
 			
 			# get free place for this book
 			generated_book.set_desired_bookshelf()
@@ -85,18 +88,31 @@ func enter_state(new_state):
 			
 			print("customer book to desk")
 			
-			enter_state(State.WAIT)
+			enter_state(State.ORDER_BOOK)
 			
+		State.ORDER_BOOK:
+			
+			book_ordered = null
+			
+			# get free book from library
+			var book_and_shelf = library.get_book_from_library()
+			book_ordered = book_and_shelf[0]
+			
+			# 0=Free 1=Ordered 2=Rented 3=Orphan
+			book_ordered.enter_state(1)
+			
+#			# do something with book
+			book_ordered.enable_particles(true)
+#			desk.enable_particles(true)
+			
+			enter_state(State.WAIT)
 			
 		State.WAIT:
 			print("Waiting at desk")
 			customer.look_at(desk.get_global_transform().origin, Vector3.UP)
 			change_animation("Idle")
-			customer_patience.start(WAIT_TIME)
 			
-			var book_and_shelf = library.get_book_from_library()
-		
-		
+			
 		State.CORRECT_BOOK:
 			print("Correct book")
 			change_animation("Book_Good")
@@ -166,7 +182,39 @@ func _on_Customer_Patience_Timer_timeout():
 			
 		State.WRONG_BOOK:
 			enter_state(State.WAIT)
+			
+		State.CORRECT_BOOK:
+			enter_state(State.WALK_TO_EXIT)
 
 
 func _on_Timer_timeout():
 	enter_state(State.SPAWN)
+
+
+func _on_Desk_book_placed():
+	
+	if state == State.WAIT:
+		var books_on_table = desk.get_node("Books").get_children()
+		
+		print([books_on_table, book_ordered])
+		
+		var correct_book_found: bool = false
+		
+		for book in books_on_table:
+			if book == book_ordered:
+				
+				correct_book_found = true
+				GameState.add_points(25)
+				
+				desk.enable_particles("stars", true)
+				desk.enable_particles("particles", false)
+				
+				book_ordered = null
+				book.call_deferred("free")
+				
+				enter_state(State.CORRECT_BOOK)
+				
+		if not correct_book_found:
+			enter_state(State.WRONG_BOOK)
+	
+	
