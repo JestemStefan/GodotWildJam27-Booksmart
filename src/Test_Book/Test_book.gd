@@ -1,6 +1,12 @@
 extends RigidBody
 class_name Book
 
+var state: int
+enum State{FREE, ORDERED, RENTED}
+
+onready var library = get_tree().get_nodes_in_group("Library")[0]
+var desired_bookshelf: BookShelf
+
 const PATH = "res://models/books/"
 
 var color : String = ["red", "yellow", "green", "blue"][randi() % 4]
@@ -11,19 +17,11 @@ onready var mesh := $MeshInstance
 onready var pickUpArea: Area = $Area
 
 
-
-func copy(old_book : Book) -> void:
-	color = old_book.color
-	numeral = old_book.numeral
-	symbol = old_book.symbol
-	
-	apply_material()
-
-
-
 func _ready() -> void:
+	randomize()
 	apply_material()
-
+	state = State.FREE
+	set_desired_bookshelf()
 
 
 func pick_up() -> void:
@@ -33,13 +31,11 @@ func pick_up() -> void:
 	pickUpArea.set_collision_layer(0)
 
 
-
 func throw() -> void:
 	# Enable collision
 	set_collision_mask(15)
 	set_collision_layer(2)
 	pickUpArea.set_collision_layer(8)
-
 
 
 func place() -> void:
@@ -49,11 +45,7 @@ func place() -> void:
 	pickUpArea.set_collision_layer(0)
 
 
-
 func apply_material() -> void:
-	print(color)
-	print(numeral)
-	print(symbol)
 	
 	var material_color = SpatialMaterial.new()
 	var material_numeral = SpatialMaterial.new()
@@ -85,3 +77,9 @@ func apply_material() -> void:
 	mesh.set_surface_material(0, material_color)
 	mesh.set_surface_material(1, material_numeral)
 	mesh.set_surface_material(2, material_symbol)
+
+
+func set_desired_bookshelf():
+	desired_bookshelf = library.get_free_bookshelf()
+	desired_bookshelf.enter_state(2)
+	library.update_library()

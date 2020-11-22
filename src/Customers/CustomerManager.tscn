@@ -22,5 +22,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9792, 0, 0 )
 
 [node name="Customer_Patience_Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="Customer_Patience_Timer" to="." method="_on_Customer_Patience_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -26,6 +26,7 @@ onready var interact_area : Area = $GimbalX/InteractionArea
 onready var book_storage: Spatial = $GimbalX/BookStorage
 
 export var book_capacity: int
+onready var library:Library = get_tree().get_nodes_in_group("Library")[0]
 
 
 func _ready() -> void:
@@ -52,16 +53,8 @@ func process_input(delta : float) -> void:
 			direction.y += int(Input.is_action_pressed("move_backward")) - int(Input.is_action_pressed("move_forward"))
 			direction.x += int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 			
-			direction = direction.normalized()
-			
-#
-#			# ------------------------------------------------------------------
-#			# Jumping
-#			if is_on_floor():
-#				if Input.is_action_pressed("move_jump"):
-#					velocity.y = JUMP_SPEED
-					
 
+			direction = direction.normalized()
 
 			#Picking up books
 			if Input.is_action_just_pressed("interact"): #mapped as E key
@@ -95,7 +88,7 @@ func process_input(delta : float) -> void:
 							
 							
 							
-							if selected_bookshelf.state == 0:  #Free
+							if selected_bookshelf.state == 0 or selected_bookshelf.state == 2:  #Free
 								if stored_books.size() > 0: # if there are books on head
 									
 									# get book from the bottom
@@ -268,7 +261,7 @@ func process_input(delta : float) -> void:
 							
 							
 							
-							if selected_bookshelf.state == 0:  #Free
+							if selected_bookshelf.state == 0 or selected_bookshelf.state == 2:  #Free
 								if stored_books.size() > 0: # if there are books on head
 									
 									# get book from the bottom
@@ -381,6 +374,8 @@ func pick_up_book(book):
 	book.set_mode(1)
 	
 	book.pick_up()
+	
+	print("book picked from ground")
 
 
 
@@ -400,6 +395,8 @@ func book_to_shelf(book, bookshelf):
 	book.set_mode(1)
 	
 	book.place()
+	
+	print("book to shelf")
 
 
 func shelf_to_player(bookshelf, book):
@@ -412,10 +409,16 @@ func shelf_to_player(bookshelf, book):
 	book_storage.add_child(book)
 	bookshelf.enter_state(0) # 1 means Free
 	
+	# reset translation and rotation
+	book.translation = Vector3.ZERO
+	book.rotation = Vector3.ZERO
+	
 	#pause physics MODE_STATIC
 	book.set_mode(1)
 	
 	book.pick_up()
+	
+	print("book to player from shelf")
 
 
 func book_to_desk(desk, book):
@@ -424,28 +427,35 @@ func book_to_desk(desk, book):
 	
 	# spawn in world
 	desk.add_child(book)
-	
-	# reset translation and rotation
-	book.translation = Vector3.ZERO
-	book.rotation = Vector3.ZERO
+	desk.get_parent()._render()
 	
 	# pause physics
 	book.set_mode(1)
 	
 	book.place()
 	
+	print("book to desk")
+	
 	
 func desk_to_player(desk, book):
 	
 	desk.remove_child(book)
+	desk.get_parent()._render()
 	
 	# spawn in world
 	book_storage.add_child(book)
+	
+	# reset translation and rotation
+	book.translation = Vector3.ZERO
+	book.rotation = Vector3.ZERO
+	
 	
 	#pause physics MODE_STATIC
 	book.set_mode(1)
 	
 	book.pick_up()
+	
+	print("book to player from desk")
 	
 
 func switch_books(bookshelf, head_book, shelf_book):
@@ -458,12 +468,18 @@ func switch_books(bookshelf, head_book, shelf_book):
 	
 	bookshelf.get_node("BookPosition").add_child(head_book)
 	
+	# reset translation and rotation
+	head_book.translation = Vector3.ZERO
+	head_book.rotation = Vector3.ZERO
+	
 	#pause physics MODE_STATIC
 	head_book.set_mode(1)
 	shelf_book.set_mode(1)
 	
 	head_book.pick_up()
 	shelf_book.place()
+	
+	print("books switched with bookshelf")
 	
 
 func switch_books_desk(desk, head_book, desk_book):
@@ -475,6 +491,7 @@ func switch_books_desk(desk, head_book, desk_book):
 	book_storage.add_child(desk_book)
 	
 	desk.add_child(head_book)
+	desk._render()
 	
 	#pause physics MODE_STATIC
 	head_book.set_mode(1)
@@ -483,6 +500,7 @@ func switch_books_desk(desk, head_book, desk_book):
 	head_book.pick_up()
 	desk_book.place()
 	
+	print("books switched with desk")
 	
 func drop_book(book):
 	
@@ -500,13 +518,25 @@ func drop_book(book):
 	# Throw in correct doirection
 	book.set_linear_velocity(-book_storage.get_global_transform().basis.z * 10 + Vector3(0, 2 ,0) + velocity)
 	
+	print("book dropeed")
 	book.throw()
 
 
 
 func update_book_stack():
-	for book in book_storage.get_children():
-		book.set_translation(Vector3.RIGHT * book.get_index())
+	var books_on_head = book_storage.get_children()
+	
+	if books_on_head.size() > 0:
+		for book in books_on_head:
+			book.set_translation(Vector3.RIGHT * book.get_index())
+			
+		var bottom_book: Book = book_storage.get_child(0)
+	
+		var bottom_book_desired_spot = bottom_book.desired_bookshelf
+		library.mark_spot(bottom_book_desired_spot)
+		
+	else:
+		library.disable_markers()
 		
 
 func change_animation(anim_name):
