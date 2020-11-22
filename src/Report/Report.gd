@@ -36,7 +36,7 @@ func _on_AnimationPlayer_animation_finished(anim_name) -> void:
 
 
 func start_score_count() -> void:
-	tween.interpolate_property(self, "score_display", 0, StaticData.score, 2)
+	tween.interpolate_property(self, "score_display", 0, GameState.score, 2)
 	tween.start()
 	
 	yield(tween, "tween_completed")
@@ -49,15 +49,15 @@ func start_score_count() -> void:
 	AudioManager.play_sound("party")
 	AudioManager.play_sound("applause")
 	
-	if StaticData.score in range(0, 100):
+	if StaticData.score in range(0, 25):
 		report.text += "Congratz! You failed!"
-	elif StaticData.score in range(100, 200):
+	elif StaticData.score in range(25, 50):
 		report.text += "You tried!"
-	elif StaticData.score in range(200, 500):
+	elif StaticData.score in range(50, 150):
 		report.text += "Quite good!"
-	elif StaticData.score in range(500, 2000):
+	elif StaticData.score in range(150, 190):
 		report.text += "Superb!"
-	elif StaticData.score in range(2000, 5000):
+	elif StaticData.score in range(190, 230):
 		report.text += "Spectacular!"
 	else:
 		report.text += "Masterful!"
