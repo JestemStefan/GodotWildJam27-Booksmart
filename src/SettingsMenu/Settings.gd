@@ -1,30 +1,39 @@
 extends Control
 
-var temp_settings := {
-	"antisotropic": 16
+var settings := {
+	"anisotropic": 16,
+	"fullscreen": false
 }
 
-onready var antisotrpoic_options := $VBoxContainer/VBoxContainer/Antisotropic/AntisotrpoicOptions
-onready var antisotropic_label := $VBoxContainer/VBoxContainer/Antisotropic/Label
+var temp_settings := {
+	"anisotropic": 16,
+	"fullscreen": false
+}
 
-onready var environment_options := $VBoxContainer/VBoxContainer/Environment/EnvironmentOptions
-onready var environment_label := $VBoxContainer/VBoxContainer/Environment/Label
+onready var anisotropic_options := $VBoxContainer/VBoxContainer/Anisotropic/AnisotropicOptions
+onready var anisotropic_label := $VBoxContainer/VBoxContainer/Anisotropic/Label
+
+onready var fullscreen_options := $VBoxContainer/VBoxContainer/FullScreen/FullScreenOptions
+onready var fullscreen_label := $VBoxContainer/VBoxContainer/FullScreen/Label
 
 onready var apply_button := $VBoxContainer/ApplyButton
 
 
 
 func _ready() -> void:
-	antisotrpoic_options.add_item("1")
-	antisotrpoic_options.add_item("2")
-	antisotrpoic_options.add_item("4")
-	antisotrpoic_options.add_item("8")
-	antisotrpoic_options.add_item("16")
-	antisotrpoic_options.selected = 4
+	anisotropic_options.add_item("1")
+	anisotropic_options.add_item("2")
+	anisotropic_options.add_item("4")
+	anisotropic_options.add_item("8")
+	anisotropic_options.add_item("16")
 	
-	environment_options.add_item("LIGHT")
-	environment_options.add_item("HEAVY")
-	environment_options.selected = 1
+	fullscreen_options.add_item("TRUE")
+	fullscreen_options.add_item("FALSE")
+	
+	anisotropic_options.selected = 4
+	fullscreen_options.selected = 1
+	
+	temp_settings = settings.duplicate(true)
 
 
 
@@ -33,27 +42,29 @@ func _on_ReturnButton_pressed() -> void:
 
 
 
-func update() -> void:
-	pass
-
-
-
 func _on_ApplyButton_pressed():
-	StaticData.settings = temp_settings.duplicate(true)
-	update()
+	settings = temp_settings.duplicate(true)
+	
+	OS.set_window_fullscreen(settings.fullscreen)
 
 
 
-func _on_AntisotrpoicOptions_item_selected(index) -> void:
-	var val : String = antisotrpoic_options.get_item_text(index)
-	temp_settings.antisotropic = int(val)
-	antisotropic_label.text = "ANTISOTROPIC FILTERING : " + val + "X"
-	update()
+func _on_AnisotropicOptions_item_selected(index) -> void:
+	var val : String = anisotropic_options.get_item_text(index)
+	temp_settings.anisotropic = int(val)
+	anisotropic_label.text = "ANTISOTROPIC FILTERING : " + val + "X"
 
 
 
-func _on_EnvironmentOptions_item_selected(index):
-	var val : String = environment_options.get_item_text(index)
-	temp_settings.environment = val
-	environment_label.text = "ENVIRONMENT : " + val
-	update()
+func _on_FullScreenOptions_item_selected(index):
+	var val : String = fullscreen_options.get_item_text(index)
+	temp_settings.fullscreen = str_to_bool(val)
+	fullscreen_label.text = "FULLSCREEN : " + val
+
+
+
+func str_to_bool(string : String) -> bool:
+	match string.to_lower():
+		"true": return true
+		"false": return false
+	return false
