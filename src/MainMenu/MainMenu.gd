@@ -13,10 +13,15 @@ onready var paige_skele = $Paige/Librarian/Skeleton
 onready var paige_books = $Paige/Books
 onready var fade_anim = $Overlay/AnimationPlayer
 onready var overlay = $Overlay
+onready var settings = $Settings
 
 
 
 func _ready() -> void:
+	camera.translation = camera_points.get_node("0").translation
+	camera.rotation_degrees = camera_points.get_node("0").rotation_degrees
+	
+	settings.visible = false
 	overlay.visible = false
 	AudioManager.play_sound("menu", true)
 	paige_anim.play("Idle_Books")
@@ -36,11 +41,21 @@ func change_menu(menu : int) -> void:
 			match menu:
 				0:
 					fade_anim.play("fade_white")
-				1: pass
+				1: 
+					change_camera_view(1)
+					focus = Focuses.OPTIONS
+					settings.visible = true
 				2: pass
 				3:
 					fade_anim.play("fade_black")
 					focus = Focuses.QUIT
+		
+		1:
+			match menu:
+				0:
+					change_camera_view(0)
+					focus = Focuses.MAIN
+					settings.visible = false
 
 
 
