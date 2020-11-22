@@ -12,6 +12,7 @@ var audio_clips = {"ambient": preload("res://assets/Audio/GWJ27_loopable_idea_1.
 					"ninja_good": preload("res://assets/Audio/SFX/Affirmative_Voice_3.ogg"),
 					"archer_fail": preload("res://assets/Audio/SFX/Confusion-Voice-4.ogg"),
 					"archer_good": preload("res://assets/Audio/SFX/Affirmative-Voice-6.ogg"),
+					"book_sparkle": preload("res://assets/Audio/SFX/GWJ27_book_sparkle_5.ogg"),
 					"menu": preload("res://assets/Audio/assets_Audio_GWJ27_Menu.ogg"),
 					"party": preload("res://assets/Audio/Party-blower.ogg"),
 					"applause": preload("res://assets/Audio/mixkit-auditorium-moderate-appla.ogg"),
