@@ -4,6 +4,7 @@ const SIMPLE_AUDIO_PLAYER = preload("res://src/AudioPlayer/SimpleAudioPlayer.tsc
 const AUDIO_PLAYER_3D = preload("res://src/AudioPlayer/3D_Audio_Player.tscn")
 
 var audio_clips = {"ambient": preload("res://assets/Audio/GWJ27_loopable_idea_1.ogg"),
+					"game_music": preload("res://assets/Audio/GWJ27_Music_V4.ogg"),
 					"wizard_fail": preload("res://assets/Audio/SFX/Santas_Death.ogg"),
 					"wizard_good": preload("res://assets/Audio/SFX/Santas-3.ogg"),
 					"warrior_fail": preload("res://assets/Audio/SFX/Confusion-Voice-3.ogg"),
