@@ -1,6 +1,6 @@
 extends Control
 
-export var round_time := 20
+export var round_time := 180
 
 onready var timer := $Timer
 onready var whistle_timer := $WhistleTimer
