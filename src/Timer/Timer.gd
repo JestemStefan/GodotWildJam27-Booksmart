@@ -30,6 +30,7 @@ func as_string_time(time : float) -> String:
 
 
 func _ready() -> void:
+	self.connect("timer_up", GameState, "_timer_up")
 	timer.wait_time = round_time
 	timer.start()
 

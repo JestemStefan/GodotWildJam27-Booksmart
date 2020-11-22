@@ -5,6 +5,7 @@ class_name Library
 var all_bookshelfs = []
 var all_free_bookshelfs = []
 var all_taken_bookshelfs = []
+var all_ordered_bookshelfs = []
 
 export var book_in_library: int
 
@@ -12,6 +13,7 @@ export var book_in_library: int
 onready var book = preload("res://src/Test_Book/Test_book.tscn")
 
 func _ready():
+	update_library()
 	
 	for i in range(book_in_library):
 		spawn_book()
@@ -48,6 +50,7 @@ func update_library():
 			
 	all_free_bookshelfs = []
 	all_taken_bookshelfs = []
+	all_ordered_bookshelfs = []
 	
 	for bookshelf in all_bookshelfs:
 		match bookshelf.state:
@@ -57,11 +60,19 @@ func update_library():
 			1: # Taken
 				all_taken_bookshelfs.append(bookshelf)
 				
-			2: # Ordered
-				pass
+			2: # Ordered Free
+				all_ordered_bookshelfs.append(bookshelf)
+			
+			3: # ordered taken
+				all_ordered_bookshelfs.append(bookshelf)
+				#all_taken_bookshelfs.append(bookshelf)
 				
-	#print("Free space: " + str(all_free_bookshelfs.size()))
-	#print("Taken space: " + str(all_taken_bookshelfs.size()))
+#	print("Free space: " + str(all_free_bookshelfs.size()))
+#	print(all_free_bookshelfs)
+#	print("Taken space: " + str(all_taken_bookshelfs.size()))
+#	print(all_taken_bookshelfs)
+#	print("Ordered space: " + str(all_ordered_bookshelfs.size()))
+#	print(all_ordered_bookshelfs)
 			
 			
 func get_free_bookshelf():
@@ -72,6 +83,7 @@ func get_free_bookshelf():
 		#select random free bookshelf from library
 		var random_index = randi()%all_free_bookshelfs.size()
 		var random_free_bookshelf = all_free_bookshelfs[random_index]
+		
 		
 		return random_free_bookshelf
 		
@@ -108,6 +120,9 @@ func spawn_book():
 		
 		# add book to it
 		empty_bookshelf.get_node("BookPosition").add_child(generated_book)
+		
+#		### ROMOVE THIS LATER##########
+#		generated_book.set_desired_bookshelf()
 		
 		# turn off physics on the book
 		generated_book.set_mode(1)

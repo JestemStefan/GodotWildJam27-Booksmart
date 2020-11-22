@@ -28,6 +28,7 @@ func _on_mouse_exited() -> void:
 func _input(event) -> void:
 	if event.is_action_pressed("l_click") && selected && is_focused():
 		main_menu.change_menu(type)
+		selected = false
 		update_slide()
 
 

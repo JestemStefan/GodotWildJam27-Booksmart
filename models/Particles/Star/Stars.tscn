@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://models/Particles/Star/Star.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://models/Particles/Star/Star_PS.tres" type="Material" id=2]
+[ext_resource path="res://models/Particles/Star/Stars_material.tres" type="Material" id=3]
+
+[node name="Stars" type="Particles"]
+material_override = ExtResource( 3 )
+cast_shadow = 0
+emitting = false
+amount = 16
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB( -2.45148, -2.85484, -3.11265, 4.90297, 5.70968, 6.22529 )
+process_material = ExtResource( 2 )
+draw_pass_1 = ExtResource( 1 )

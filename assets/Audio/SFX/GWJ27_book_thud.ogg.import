@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/GWJ27_book_thud.ogg-c687cfda151da784e6d9b0dc6ef7284f.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/GWJ27_book_thud.ogg"
+dest_files=[ "res://.import/GWJ27_book_thud.ogg-c687cfda151da784e6d9b0dc6ef7284f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

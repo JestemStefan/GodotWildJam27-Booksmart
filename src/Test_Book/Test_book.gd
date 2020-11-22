@@ -2,7 +2,7 @@ extends RigidBody
 class_name Book
 
 var state: int
-enum State{FREE, ORDERED, RENTED}
+enum State{FREE, ORDERED, RENTED, ORPHAN}
 
 onready var library = get_tree().get_nodes_in_group("Library")[0]
 var desired_bookshelf: BookShelf
@@ -15,13 +15,13 @@ var symbol : String = ["ninja", "knight", "wizard", "archer"][randi() % 4]
 
 onready var mesh := $MeshInstance
 onready var pickUpArea: Area = $Area
+onready var particles: Particles = $Particles
 
 
 func _ready() -> void:
 	randomize()
 	apply_material()
 	state = State.FREE
-	set_desired_bookshelf()
 
 
 func pick_up() -> void:
@@ -81,5 +81,17 @@ func apply_material() -> void:
 
 func set_desired_bookshelf():
 	desired_bookshelf = library.get_free_bookshelf()
-	desired_bookshelf.enter_state(2)
+	print(desired_bookshelf)
+	
+	if desired_bookshelf.state == 1:
+		desired_bookshelf.enter_state(3)
+	elif desired_bookshelf.state == 0:
+		desired_bookshelf.enter_state(2)
 	library.update_library()
+	
+func enable_particles(on_off: bool):
+	particles.set_emitting(on_off)
+
+
+func enter_state(new_state):
+	state = new_state

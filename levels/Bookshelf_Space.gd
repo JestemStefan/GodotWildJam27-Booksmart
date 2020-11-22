@@ -2,10 +2,11 @@ extends Area
 class_name BookShelf
 
 var state : int
-enum States {FREE, TAKEN, ORDERED}
+enum States {FREE, TAKEN, ORDERED_FREE, ORDERED_TAKEN}
 
 onready var marker: MeshInstance = $Marker
 onready var effect_player: AnimationPlayer = $EffectPlayer
+onready var stars_particles: Particles = $Stars
 
 func _ready():
 	state = States.FREE
@@ -22,5 +23,8 @@ func blink(on_off: bool):
 		false:
 			marker.set_visible(false)
 			effect_player.stop()
+			
+func stars():
+	stars_particles.set_emitting(true)
 
 	

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/GWJ27_ladder_rail_to_loop.ogg-8869944d597cd8d59fe28061cd2c97f5.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/GWJ27_ladder_rail_to_loop.ogg"
+dest_files=[ "res://.import/GWJ27_ladder_rail_to_loop.ogg-8869944d597cd8d59fe28061cd2c97f5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

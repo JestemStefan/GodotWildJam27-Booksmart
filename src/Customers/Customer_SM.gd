@@ -2,18 +2,27 @@ extends Spatial
 
 # Tween #
 onready var tween: Tween = $Tween
-onready var desk = get_tree().get_nodes_in_group("Desk")[0]
+onready var desk: Desk = get_tree().get_nodes_in_group("Desk")[0]
 
 # Book #
 onready var library:Library = get_tree().get_nodes_in_group("Library")[0]
 onready var book = preload("res://src/Test_Book/Test_book.tscn")
 
+var book_ordered: Book
+
+onready var spawn_pos: Spatial = $SpawnPosition
 onready var desk_pos: Spatial = $DeskPosition
 onready var exit_pos: Spatial = $ExitPosition
 
-onready var customer: Spatial = $Customer_Wizard
-onready var customer_hand = $Customer_Wizard/Books
-onready var customer_animPlayer: AnimationPlayer = $Customer_Wizard/Wizard/AnimationPlayer
+onready var customer: Spatial = $Customer
+
+onready var Wizard = preload("res://src/Customers/Wizard.tscn")
+onready var Archer = preload("res://src/Customers/Archer.tscn")
+onready var Ninja = preload("res://src/Customers/Ninja.tscn")
+onready var Warrior = preload("res://src/Customers/Warrior.tscn")
+
+onready var customer_hand = $Customer/Books
+onready var customer_animPlayer: AnimationPlayer
 
 onready var customer_patience: Timer = $Customer_Patience_Timer
 onready var timer: Timer = $Timer
@@ -21,7 +30,7 @@ onready var timer: Timer = $Timer
 export var WAIT_TIME: int
 
 # Meta #
-enum State {SPAWN, WALK_TO_DESK, GIVE_BOOKS, WAIT, WRONG_BOOK, CORRECT_BOOK, WALK_TO_EXIT, DESPAWN}
+enum State {SPAWN, WALK_TO_DESK, GIVE_BOOKS, ORDER_BOOK, WAIT, WRONG_BOOK, CORRECT_BOOK, WALK_TO_EXIT, DESPAWN}
 var state : int 
 
 func _ready():
@@ -33,16 +42,29 @@ func enter_state(new_state):
 	match state:
 		
 		State.SPAWN:
-			print("Customer spawned")
+			
+			randomize()
+			var random_customer = [Wizard, Archer, Ninja, Warrior][randi() % 4]
+			var spawn_customer = random_customer.instance()
+			
+			customer.add_child(spawn_customer)
+			
+			customer.translation = spawn_pos.translation
+			customer_animPlayer = spawn_customer.get_anim_player()
+			
 			# make a book
 			var generated_book = book.instance()
 			
 			# get customer hand
-			var customer_hand = $Customer_Wizard/Books
+			var customer_hand = $Customer/Books
 			
 		
 			# add book to it
 			customer_hand.add_child(generated_book)
+			generated_book.enter_state(2)
+			
+			# get free place for this book
+			generated_book.set_desired_bookshelf()
 			
 			# turn off physics on the book
 			generated_book.set_mode(1)
@@ -64,7 +86,7 @@ func enter_state(new_state):
 			tween.start()
 			
 			customer.look_at(desk_pos.get_global_transform().origin, Vector3.UP)
-			customer_animPlayer.play("Run")
+			change_animation("Walk")
 
 		State.GIVE_BOOKS:
 			
@@ -82,16 +104,31 @@ func enter_state(new_state):
 			
 			print("customer book to desk")
 			
-			enter_state(State.WAIT)
+			enter_state(State.ORDER_BOOK)
 			
+		State.ORDER_BOOK:
+			
+			book_ordered = null
+			
+			# get free book from library
+			var book_and_shelf = library.get_book_from_library()
+			book_ordered = book_and_shelf[0]
+			
+			# 0=Free 1=Ordered 2=Rented 3=Orphan
+			book_ordered.enter_state(1)
+			
+#			# do something with book
+			book_ordered.enable_particles(true)
+#			desk.enable_particles(true)
+			
+			enter_state(State.WAIT)
 			
 		State.WAIT:
 			print("Waiting at desk")
 			customer.look_at(desk.get_global_transform().origin, Vector3.UP)
 			change_animation("Idle")
-			customer_patience.start(WAIT_TIME)
-		
-		
+			
+			
 		State.CORRECT_BOOK:
 			print("Correct book")
 			change_animation("Book_Good")
@@ -102,6 +139,7 @@ func enter_state(new_state):
 		State.WRONG_BOOK:
 			print("Wrong book")
 			change_animation("Book_Bad")
+			AudioManager.play_sound("wizard_fail")
 			
 			customer_patience.start(1)
 			
@@ -118,7 +156,7 @@ func enter_state(new_state):
 			tween.start()
 			
 			customer.look_at(exit_pos.get_global_transform().origin, Vector3.UP)
-			change_animation("Run")
+			change_animation("Walk")
 	
 func _physics_process(delta):
 		pass
@@ -128,9 +166,9 @@ func generate_books():
 	
 func change_animation(anim_name):
 	match anim_name:
-		"Run":
+		"Walk":
 			customer_animPlayer.play(anim_name)
-			customer_animPlayer.set_speed_scale(2)
+			customer_animPlayer.set_speed_scale(3)
 
 		
 		"Idle":
@@ -140,6 +178,10 @@ func change_animation(anim_name):
 		"Book_Good":
 			customer_animPlayer.play(anim_name)
 			customer_animPlayer.set_speed_scale(1.5)
+			
+		"Book_Bad":
+			customer_animPlayer.play(anim_name)
+			customer_animPlayer.set_speed_scale(1)
 
 			
 
@@ -161,7 +203,42 @@ func _on_Customer_Patience_Timer_timeout():
 			
 		State.WRONG_BOOK:
 			enter_state(State.WAIT)
+			
+		State.CORRECT_BOOK:
+			enter_state(State.WALK_TO_EXIT)
 
 
 func _on_Timer_timeout():
 	enter_state(State.SPAWN)
+
+
+func _on_Desk_book_placed():
+	
+	if state == State.WAIT:
+		var books_on_table = desk.get_node("Books").get_children()
+		
+		print([books_on_table, book_ordered])
+		
+		var correct_book_found: bool = false
+		
+		for book in books_on_table:
+			if book == book_ordered:
+				
+				correct_book_found = true
+				print("Correct book found")
+				GameState.add_points(25)
+				
+				desk.enable_particles("stars", true)
+				desk.enable_particles("particles", false)
+				
+				book_ordered = null
+				book.call_deferred("free")
+				
+				enter_state(State.CORRECT_BOOK)
+		
+		
+		if not correct_book_found:
+			print("Correct book not found")
+			enter_state(State.WRONG_BOOK)
+	
+	

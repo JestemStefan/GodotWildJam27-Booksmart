@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Paige_patter_1.ogg-ca05e0c564f0ff81174c1ee44f5c2e49.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/SFX/Paige_patter_1.ogg"
+dest_files=[ "res://.import/Paige_patter_1.ogg-ca05e0c564f0ff81174c1ee44f5c2e49.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
