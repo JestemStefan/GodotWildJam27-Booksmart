@@ -16,3 +16,9 @@ func penalty(minus_points: int):
 	
 func update_score():
 	print("Current score: " + str(score))
+	
+func _timer_up():
+	print("Time out")
+	
+	#TODO
+	#Enter rating screen
