@@ -11,5 +11,5 @@ dest_files=[ "res://.import/GWJ27_loopable_idea_1.ogg-f21249d85ffb173991a1281f21
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

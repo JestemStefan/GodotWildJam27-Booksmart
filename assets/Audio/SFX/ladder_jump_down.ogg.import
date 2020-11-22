@@ -11,5 +11,5 @@ dest_files=[ "res://.import/ladder_jump_down.ogg-806a4bf08fb546c554548266b9aa4d6
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Paige_patter_3_steps_2.ogg-dc0b249543488ec5321e161c0
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
