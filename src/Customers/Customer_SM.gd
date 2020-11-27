@@ -96,7 +96,7 @@ func enter_state(new_state):
 										"translation", 			# what
 										customer.translation, 	# initial value
 										desk_pos.translation, 	# end value
-										5,						# rate
+										2,						# rate
 										Tween.TRANS_LINEAR, 	# transition type
 										Tween.EASE_IN_OUT)		# easing
 			tween.start()
@@ -192,7 +192,7 @@ func enter_state(new_state):
 										"translation", 			# what
 										customer.translation, 	# initial value
 										exit_pos.translation, 	# end value
-										5,						# rate
+										2,						# rate
 										Tween.TRANS_LINEAR, 	# transition type
 										Tween.EASE_IN_OUT)		# easing
 			tween.start()
