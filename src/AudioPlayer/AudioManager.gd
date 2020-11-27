@@ -24,7 +24,7 @@ var audio_clips = {"ambient": preload("res://assets/Audio/GWJ27_loopable_idea_1.
 func _ready():
 	pass # Replace with function body.
 
-func play_sound(sound, shouldLoop = false, position = null):
+func play_sound(sound, shouldLoop = false, position = null, bus="Music"):
 	
 	#check if there is an audio clips
 	if audio_clips.has(sound):
@@ -39,6 +39,7 @@ func play_sound(sound, shouldLoop = false, position = null):
 			audio_player.play_audio(audio_file)
 			audio_player.name = sound
 			add_child(audio_player, true)
+			audio_player.set_bus(bus)
 			audio_player.loop(shouldLoop)
 			audio_player.set_translation(position)
 			
@@ -48,6 +49,7 @@ func play_sound(sound, shouldLoop = false, position = null):
 			audio_player.play_audio(audio_file)
 			audio_player.name = sound
 			position.add_child(audio_player, true)
+			audio_player.set_bus(bus)
 			audio_player.loop(shouldLoop)
 			
 		else:
@@ -55,6 +57,7 @@ func play_sound(sound, shouldLoop = false, position = null):
 			audio_player.play_audio(audio_file)
 			audio_player.name = sound
 			add_child(audio_player, true)
+			audio_player.set_bus(bus)
 			audio_player.loop(shouldLoop)
 			
 

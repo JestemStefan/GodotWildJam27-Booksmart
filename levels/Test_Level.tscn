@@ -62,10 +62,6 @@ fov = 53.0
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.192, 0.116778, 2.009 )
 
-[node name="Listener" type="Listener" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.192, -0.116778, 2.4551 )
-current = true
-
 [node name="Level_Assets" type="Spatial" parent="."]
 
 [node name="Floor_Walls" type="Spatial" parent="Level_Assets"]
@@ -155,7 +151,7 @@ transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 11.4085
 
 [node name="Desk" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.3461 )
-desk_capacity = 10
+desk_capacity = 100
 
 [node name="Ladder" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.827157 )
@@ -202,6 +198,9 @@ material/0 = null
 [node name="Barrel" parent="Navigation" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.71158, 0, 8.04553 )
 speed = 3
+
+[node name="Listener" type="Listener" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.28588 )
 [connection signal="book_placed" from="Desk" to="CustomerManager" method="_on_Desk_book_placed"]
 
 [editable path="CustomerManager"]

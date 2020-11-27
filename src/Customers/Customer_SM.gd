@@ -68,23 +68,11 @@ func enter_state(new_state):
 			customer.translation = spawn_pos.translation
 			customer_animPlayer = spawn_customer.get_anim_player()
 			
-			# make a book
-			var generated_book = book.instance()
-			
 			# get customer hand
 			var customer_hand = $Customer/Books
 			
-		
-			# add book to it
-			customer_hand.add_child(generated_book)
-			generated_book.enter_state(2)
-			
-			# get free place for this book
-			generated_book.set_desired_bookshelf()
-			
-			# turn off physics on the book
-			generated_book.set_mode(1)
-			generated_book.place()
+			for i in range(randi()%2 + 1):
+				generate_book(customer_hand)
 			
 			enter_state(State.WALK_TO_DESK)
 		
@@ -105,19 +93,12 @@ func enter_state(new_state):
 			change_animation("Walk")
 
 		State.GIVE_BOOKS:
+			var customer_books = customer_hand.get_children()
 			
-			var customer_book = customer_hand.get_child(0)
-			customer_hand.remove_child(customer_book)
-	
-			# spawn in world
-			desk.get_node("Books").add_child(customer_book)
-			desk._render()
-			
-			# pause physics
-			customer_book.set_mode(1)
-			
-			customer_book.place()
-			
+			for customer_book in customer_books:
+				give_books(customer_book)
+				
+
 			print("customer book to desk")
 			
 			enter_state(State.ORDER_BOOK)
@@ -151,16 +132,16 @@ func enter_state(new_state):
 			
 			match customer_type:
 				"Wizard":
-					AudioManager.play_sound("wizard_good", false, customer)
+					AudioManager.play_sound("wizard_good", false, customer, "Effects")
 				
 				"Warrior":
-					AudioManager.play_sound("warrior_good", false, customer)
+					AudioManager.play_sound("warrior_good", false, customer, "Effects")
 				
 				"Ninja":
-					AudioManager.play_sound("ninja_good", false, customer)
+					AudioManager.play_sound("ninja_good", false, customer, "Effects")
 				
 				"Archer":
-					AudioManager.play_sound("archer_good", false, customer)
+					AudioManager.play_sound("archer_good", false, customer, "Effects")
 			
 			customer_patience.start(1)
 			
@@ -171,16 +152,16 @@ func enter_state(new_state):
 			
 			match customer_type:
 				"Wizard":
-					AudioManager.play_sound("wizard_fail", false, customer)
+					AudioManager.play_sound("wizard_fail", false, customer, "Effects")
 				
 				"Warrior":
-					AudioManager.play_sound("warrior_fail", false, customer)
+					AudioManager.play_sound("warrior_fail", false, customer, "Effects")
 					
 				"Ninja":
-					AudioManager.play_sound("ninja_fail", false, customer)
+					AudioManager.play_sound("ninja_fail", false, customer, "Effects")
 				
 				"Archer":
-					AudioManager.play_sound("archer_fail", false, customer)
+					AudioManager.play_sound("archer_fail", false, customer, "Effects")
 			
 			
 			customer_patience.start(1)
@@ -202,9 +183,6 @@ func enter_state(new_state):
 	
 func _physics_process(delta):
 		pass
-
-func generate_books():
-	pass
 	
 func change_animation(anim_name):
 	match anim_name:
@@ -272,7 +250,7 @@ func _on_Desk_book_placed():
 				GameState.add_points(25)
 				
 				desk.enable_particles("stars", true)
-				AudioManager.play_sound("book_sparkle", false, desk)
+				AudioManager.play_sound("book_sparkle", false, desk, "Effects")
 				desk.enable_particles("particles", false)
 				
 				book_ordered = null
@@ -285,4 +263,29 @@ func _on_Desk_book_placed():
 			print("Correct book not found")
 			enter_state(State.WRONG_BOOK)
 	
+func generate_book(customer_hand):
+	# make a book
+	var generated_book = book.instance()
+	# add book to it
+	customer_hand.add_child(generated_book)
+	generated_book.enter_state(2)
 	
+	# get free place for this book
+	generated_book.set_desired_bookshelf()
+	
+	# turn off physics on the book
+	generated_book.set_mode(1)
+	generated_book.place()
+	
+func give_books(customer_book):
+	
+	customer_hand.remove_child(customer_book)
+
+	# spawn in world
+	desk.get_node("Books").add_child(customer_book)
+	desk._render()
+	
+	# pause physics
+	customer_book.set_mode(1)
+	
+	customer_book.place()
