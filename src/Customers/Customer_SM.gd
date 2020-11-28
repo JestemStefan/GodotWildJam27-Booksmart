@@ -132,16 +132,16 @@ func enter_state(new_state):
 			
 			match customer_type:
 				"Wizard":
-					AudioManager.play_sound("wizard_good", false, customer, "Effects")
+					AudioManager.play_sound("wizard_good", false, customer, "Voice")
 				
 				"Warrior":
-					AudioManager.play_sound("warrior_good", false, customer, "Effects")
+					AudioManager.play_sound("warrior_good", false, customer, "Voice")
 				
 				"Ninja":
-					AudioManager.play_sound("ninja_good", false, customer, "Effects")
+					AudioManager.play_sound("ninja_good", false, customer, "Voice")
 				
 				"Archer":
-					AudioManager.play_sound("archer_good", false, customer, "Effects")
+					AudioManager.play_sound("archer_good", false, customer, "Voice")
 			
 			customer_patience.start(1)
 			
@@ -152,16 +152,16 @@ func enter_state(new_state):
 			
 			match customer_type:
 				"Wizard":
-					AudioManager.play_sound("wizard_fail", false, customer, "Effects")
+					AudioManager.play_sound("wizard_fail", false, customer, "Voice")
 				
 				"Warrior":
-					AudioManager.play_sound("warrior_fail", false, customer, "Effects")
+					AudioManager.play_sound("warrior_fail", false, customer, "Voice")
 					
 				"Ninja":
-					AudioManager.play_sound("ninja_fail", false, customer, "Effects")
+					AudioManager.play_sound("ninja_fail", false, customer, "Voice")
 				
 				"Archer":
-					AudioManager.play_sound("archer_fail", false, customer, "Effects")
+					AudioManager.play_sound("archer_fail", false, customer, "Voice")
 			
 			
 			customer_patience.start(1)

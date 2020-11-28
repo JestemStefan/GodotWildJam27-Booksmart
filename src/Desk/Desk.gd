@@ -23,7 +23,7 @@ func _render() -> void:
 		
 		book.translation = Vector3(
 			0,
-			i * 0.4,
+			i * -0.4,
 			0
 		)
 

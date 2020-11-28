@@ -200,7 +200,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.71158, 0, 8.04553 )
 speed = 3
 
 [node name="Listener" type="Listener" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.28588 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.21022, 3.8239 )
 [connection signal="book_placed" from="Desk" to="CustomerManager" method="_on_Desk_book_placed"]
 
 [editable path="CustomerManager"]

@@ -18,7 +18,8 @@ var audio_clips = {"ambient": preload("res://assets/Audio/GWJ27_loopable_idea_1.
 					"party": preload("res://assets/Audio/Party-blower.ogg"),
 					"applause": preload("res://assets/Audio/mixkit-auditorium-moderate-appla.ogg"),
 					"main": preload("res://assets/Audio/GWJ27_Music_V4.ogg"),
-					"whistle": preload("res://assets/Audio/SFX/referee-blowing-whistle-sound-effect.ogg")}
+					"whistle": preload("res://assets/Audio/SFX/referee-blowing-whistle-sound-effect.ogg"),
+					"doorbell": preload("res://assets/Audio/SFX/Shop_entry_2.ogg")}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
