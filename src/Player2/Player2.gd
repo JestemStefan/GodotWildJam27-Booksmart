@@ -63,11 +63,9 @@ func process_input(delta : float) -> void:
 				
 				if interact_ray.is_colliding():
 					var picked_object = interact_ray.get_collider()
-					print(picked_object)
 					match picked_object.get_groups()[0]:
 
 						"Books":
-							print("Book")
 							var picked_book = picked_object.get_parent()
 
 							var stored_books = book_storage.get_children()
@@ -82,8 +80,6 @@ func process_input(delta : float) -> void:
 							update_book_stack()
 
 						"Bookshelfs":
-							
-							print("Bookshelf")
 							
 							
 							var selected_bookshelf = picked_object
@@ -122,8 +118,6 @@ func process_input(delta : float) -> void:
 							update_book_stack()
 						
 						"Desk":
-							print("Desk")
-							
 							
 							# save picked object as desk
 							var selected_desk = picked_object
@@ -237,11 +231,9 @@ func process_input(delta : float) -> void:
 					
 					#save collider and check what it is
 					var picked_object = interact_ray.get_collider()
-					print(picked_object)
 					match picked_object.get_groups()[0]:
 
 						"Books":
-							print("Book")
 							var picked_book = picked_object
 
 							var stored_books = book_storage.get_children()
@@ -257,8 +249,6 @@ func process_input(delta : float) -> void:
 
 
 						"Bookshelfs":
-							
-							print("Bookshelf")
 							
 							var selected_bookshelf = picked_object
 
@@ -393,7 +383,6 @@ func pick_up_book(book):
 	
 	book.pick_up()
 	
-	print("book picked from ground")
 
 
 
@@ -426,12 +415,10 @@ func book_to_shelf(book: Book, bookshelf):
 	
 	
 	
-	print("book to shelf")
 
 
 func shelf_to_player(bookshelf, book):
 	
-	print(book.get_name())
 	
 	bookshelf.get_node("BookPosition").remove_child(book)
 	
@@ -455,8 +442,7 @@ func shelf_to_player(bookshelf, book):
 	book.set_mode(1)
 	
 	book.pick_up()
-	
-	print("book to player from shelf")
+
 
 
 func book_to_desk(desk, book):
@@ -473,7 +459,6 @@ func book_to_desk(desk, book):
 	
 	book.place()
 	
-	print("book to desk")
 	
 	
 func desk_to_player(desk, book):
@@ -494,7 +479,6 @@ func desk_to_player(desk, book):
 	
 	book.pick_up()
 	
-	print("book to player from desk")
 	
 
 func switch_books(bookshelf, head_book, shelf_book):
@@ -518,8 +502,6 @@ func switch_books(bookshelf, head_book, shelf_book):
 	head_book.pick_up()
 	shelf_book.place()
 	
-	print("books switched with bookshelf")
-	
 
 func switch_books_desk(desk, head_book, desk_book):
 	
@@ -540,7 +522,6 @@ func switch_books_desk(desk, head_book, desk_book):
 	head_book.pick_up()
 	desk_book.place()
 	
-	print("books switched with desk")
 	
 func drop_book(book):
 	
@@ -558,7 +539,6 @@ func drop_book(book):
 	# Throw in correct doirection
 	book.set_linear_velocity(-book_storage.get_global_transform().basis.z * 10 + Vector3(0, 2 ,0) + velocity)
 	
-	print("book dropeed")
 	book.throw()
 
 

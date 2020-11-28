@@ -62,7 +62,6 @@ func play_sound(sound, shouldLoop = false, position = null, bus="Music"):
 			audio_player.loop(shouldLoop)
 			
 
-		print("now playing " + sound)
 		
 	else:
 		print("No sound called" + sound + "in library")

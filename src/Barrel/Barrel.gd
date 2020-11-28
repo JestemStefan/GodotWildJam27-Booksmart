@@ -32,23 +32,19 @@ func _ready():
 func enter_state(new_state):
 	
 	state = new_state
-	print(state)
 	
 	match state:
 		States.IDLE:
-			print("Berrel IDLE")
 			victim_timer.start(2)
 			play_animation("Idle")
 			change_material()
 			
 		States.MOVE:
-			print("Berrel Move")
 			path_timer.start(0.5)
 			play_animation("Walk")
 			change_material()
 			
 		States.BACK:
-			print("Berrel Back")
 			path_timer.start(0.5)
 			play_animation("Walk")
 			change_material()
@@ -143,11 +139,9 @@ func _on_Victim_Timer_timeout():
 	match state:
 		States.IDLE:
 			var victims = get_tree().get_nodes_in_group("Orphans")
-			print(victims)
 			
 			if victims.size() > 0:
 				victim = victims[0]
-				print("chasing: " + victim.get_name())
 		
 				path_timer.start(0.5)
 		
@@ -159,7 +153,6 @@ func remove_victim(book):
 
 
 func _on_BookKill_Timer_timeout():
-	print("Barrel back")
 	var temp_victim = victim
 	remove_victim(victim)
 	temp_victim.call_deferred("free")

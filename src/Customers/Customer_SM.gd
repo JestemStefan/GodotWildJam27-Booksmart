@@ -60,7 +60,6 @@ func enter_state(new_state):
 				3:
 					customer_type = "Warrior"
 			
-			print(customer_type)
 			var spawn_customer = random_customer.instance()
 			
 			customer.add_child(spawn_customer)
@@ -78,7 +77,6 @@ func enter_state(new_state):
 		
 		
 		State.WALK_TO_DESK:
-			print("Walking to desk")
 			
 			tween.interpolate_property(customer, 				# who
 										"translation", 			# what
@@ -99,7 +97,6 @@ func enter_state(new_state):
 				give_books(customer_book)
 				
 
-			print("customer book to desk")
 			
 			enter_state(State.ORDER_BOOK)
 			
@@ -121,13 +118,11 @@ func enter_state(new_state):
 			enter_state(State.WAIT)
 			
 		State.WAIT:
-			print("Waiting at desk")
 			customer.look_at(desk.get_global_transform().origin, Vector3.UP)
 			change_animation("Idle")
 			
 			
 		State.CORRECT_BOOK:
-			print("Correct book")
 			change_animation("Book_Good")
 			
 			match customer_type:
@@ -147,7 +142,6 @@ func enter_state(new_state):
 			
 			
 		State.WRONG_BOOK:
-			print("Wrong book")
 			change_animation("Book_Bad")
 			
 			match customer_type:
@@ -167,7 +161,6 @@ func enter_state(new_state):
 			customer_patience.start(1)
 			
 		State.WALK_TO_EXIT:
-			print("Walking to exit")
 			
 			tween.interpolate_property(customer, 				# who
 										"translation", 			# what
@@ -238,7 +231,6 @@ func _on_Desk_book_placed():
 	if state == State.WAIT:
 		var books_on_table = desk.get_node("Books").get_children()
 		
-		print([books_on_table, book_ordered])
 		
 		var correct_book_found: bool = false
 		
@@ -246,7 +238,6 @@ func _on_Desk_book_placed():
 			if book == book_ordered:
 				
 				correct_book_found = true
-				print("Correct book found")
 				GameState.add_points(25)
 				
 				desk.enable_particles("stars", true)
@@ -260,7 +251,6 @@ func _on_Desk_book_placed():
 		
 		
 		if not correct_book_found:
-			print("Correct book not found")
 			enter_state(State.WRONG_BOOK)
 	
 func generate_book(customer_hand):
