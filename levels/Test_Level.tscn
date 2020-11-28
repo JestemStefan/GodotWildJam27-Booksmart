@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://models/floortiles/floortile_wood_level.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
@@ -16,51 +16,66 @@
 [ext_resource path="res://src/Timer/Timer.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Score/Score.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Barrel/Barrel.tscn" type="PackedScene" id=16]
+[ext_resource path="res://levels/CameraManager.gd" type="Script" id=17]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 3 )
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 20, 1, 20 )
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_texture = ExtResource( 5 )
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 1, 8, 15 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=6]
 albedo_texture = ExtResource( 12 )
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape" id=7]
 extents = Vector3( 11.9282, 2.73824, 1 )
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=8]
 extents = Vector3( 0.698316, 3.5527, 6.86403 )
 
-[sub_resource type="NavigationMesh" id=8]
+[sub_resource type="NavigationMesh" id=9]
 vertices = PoolVector3Array( -10.0175, 0.43322, 3.37701, -8.2175, 0.43322, 3.37701, -7.9175, 0.43322, 2.77701, -10.0175, 0.43322, -0.522993, -10.0175, 0.43322, 3.37701, -7.9175, 0.43322, 2.77701, -2.8175, 0.43322, -0.522993, 4.0825, 0.43322, 2.77701, 4.3825, 0.43322, -0.522993, -2.8175, 0.43322, -0.522993, -7.9175, 0.43322, 2.77701, 4.3825, 0.43322, -0.522993, 4.0825, 0.43322, 2.77701, 6.1825, 0.43322, 3.07701, 10.0825, 0.43322, -0.522993, -7.9175, 0.43322, 7.57701, -8.2175, 0.43322, 3.37701, -10.0175, 0.43322, 3.37701, -10.0175, 0.43322, 9.07701, -0.1175, 0.43322, 9.07701, 10.0825, 0.43322, 9.07701, 5.8825, 0.43322, 7.57701, -1.0175, 0.43322, 7.57701, -7.9175, 0.43322, 7.57701, -10.0175, 0.43322, 9.07701, -0.1175, 0.43322, 9.07701, -1.0175, 0.43322, 7.57701, 10.0825, 0.43322, 9.07701, 10.0825, 0.43322, -0.522993, 6.1825, 0.43322, 3.07701, 5.8825, 0.43322, 7.57701, -7.0175, 6.43322, 3.97701, -7.0175, 6.43322, 6.37701, 4.9825, 6.43322, 6.37701, 4.9825, 6.43322, 3.97701, -6.7175, 0.43322, 4.27701, -6.7175, 0.43322, 6.07701, 4.6825, 0.43322, 6.07701, 4.6825, 0.43322, 4.27701 )
 polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 4, 3, 5 ), PoolIntArray( 5, 3, 6 ), PoolIntArray( 8, 7, 9 ), PoolIntArray( 9, 7, 10 ), PoolIntArray( 12, 11, 13 ), PoolIntArray( 13, 11, 14 ), PoolIntArray( 16, 15, 17 ), PoolIntArray( 17, 15, 18 ), PoolIntArray( 22, 21, 19 ), PoolIntArray( 19, 21, 20 ), PoolIntArray( 26, 25, 23 ), PoolIntArray( 23, 25, 24 ), PoolIntArray( 30, 29, 27 ), PoolIntArray( 27, 29, 28 ), PoolIntArray( 34, 33, 31 ), PoolIntArray( 31, 33, 32 ), PoolIntArray( 38, 37, 35 ), PoolIntArray( 35, 37, 36 ) ]
 agent/height = 1.0
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=10]
 albedo_color = Color( 0.341176, 0, 0, 1 )
 
-[sub_resource type="CubeMesh" id=10]
-material = SubResource( 9 )
+[sub_resource type="CubeMesh" id=11]
+material = SubResource( 10 )
 size = Vector3( 21.235, 2, 10.895 )
 
-[sub_resource type="CubeMesh" id=11]
+[sub_resource type="CubeMesh" id=12]
 size = Vector3( 12.758, 6, 3.272 )
+
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 5.90189, 3.41451, 2.2805 )
+
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 1.34289, 3.93942, 2.54065 )
+
+[sub_resource type="BoxShape" id=15]
+extents = Vector3( 2.19, 3.89698, 2.27225 )
+
+[sub_resource type="BoxShape" id=16]
+extents = Vector3( 6.36586, 4.1286, 1.91474 )
+
+[sub_resource type="BoxShape" id=17]
+extents = Vector3( 1.46046, 1, 2.34674 )
+
+[sub_resource type="BoxShape" id=18]
+extents = Vector3( 2.08798, 4.32096, 2.67783 )
 
 [node name="Test_Level" type="Spatial"]
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.58374, 0.811941, 0, -0.811941, 0.58374, 0, 19.7471, 16.3137 )
-fov = 53.0
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.192, 0.116778, 2.009 )
+transform = Transform( -0.999858, 0, -0.0168415, 0, 1, 0, 0.0168415, 0, -0.999858, -0.31479, 0.116778, 8.43146 )
 
 [node name="Level_Assets" type="Spatial" parent="."]
 
@@ -72,17 +87,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.68712 )
 [node name="MeshInstance" type="MeshInstance" parent="Level_Assets/Floor_Walls/Floor"]
 use_in_baked_light = true
 mesh = ExtResource( 1 )
-material/0 = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="Level_Assets/Floor_Walls/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.1556, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 1 )
-material/0 = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Level_Assets/Floor_Walls/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Walls" type="StaticBody" parent="Level_Assets/Floor_Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.32729, 0 )
@@ -91,23 +106,23 @@ collision_mask = 15
 [node name="MeshInstance" type="MeshInstance" parent="Level_Assets/Floor_Walls/Walls"]
 use_in_baked_light = true
 mesh = ExtResource( 4 )
-material/0 = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2538, 6.17743, 8.08494 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.254, 6.177, 8.085 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -0.018116, 6.17743, -3.07623 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="Level_Assets/Floor_Walls/Walls"]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.0178795, 6.177, 20.3388 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Furniture" type="Spatial" parent="Level_Assets"]
 
@@ -116,19 +131,19 @@ shape = SubResource( 4 )
 [node name="MeshInstance" type="MeshInstance" parent="Level_Assets/Furniture/Counter_Shelfs"]
 use_in_baked_light = true
 mesh = ExtResource( 6 )
-material/0 = SubResource( 5 )
+material/0 = SubResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53932, 10.1041 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9725, 3.3956, 4.34136 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Level_Assets/Furniture/Counter_Shelfs"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.973, 3.32136, 4.341 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="Lights" type="Spatial" parent="Level_Assets"]
 
@@ -153,13 +168,13 @@ transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 11.4085
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.3461 )
 desk_capacity = 100
 
-[node name="Ladder" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.827157 )
-
 [node name="LadderShort" parent="." groups=[
 "Ladder",
 ] instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.87146 )
+
+[node name="Ladder" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.827157 )
 
 [node name="CustomerManager" parent="." instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.1652 )
@@ -181,18 +196,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6133, 0, 0.285017 )
 ]]
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
-navmesh = SubResource( 8 )
+navmesh = SubResource( 9 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.96678, 4.32451 )
 visible = false
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.966038, 3.16126, 5.054 )
 visible = false
-mesh = SubResource( 11 )
+mesh = SubResource( 12 )
 material/0 = null
 
 [node name="Barrel" parent="Navigation" instance=ExtResource( 16 )]
@@ -201,6 +216,112 @@ speed = 3
 
 [node name="Listener" type="Listener" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.21022, 3.8239 )
+
+[node name="CameraManager" type="Spatial" parent="."]
+script = ExtResource( 17 )
+
+[node name="Desk_Area" type="Area" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6.095 )
+input_ray_pickable = false
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="CameraManager/Desk_Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.850793, 2.34993, 1.0522 )
+shape = SubResource( 13 )
+
+[node name="Left_Bottom_Area" type="Area" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.88994, 1, 6.82853 )
+input_ray_pickable = false
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="CameraManager/Left_Bottom_Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0929251, 2.96677, 0 )
+shape = SubResource( 14 )
+
+[node name="Right_Bottom_Area" type="Area" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 6.095 )
+input_ray_pickable = false
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="CameraManager/Right_Bottom_Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97187, 2.90424, 1.16052 )
+shape = SubResource( 15 )
+
+[node name="Center_Top_Area" type="Area" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.758783, 1, 0.975787 )
+input_ray_pickable = false
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="CameraManager/Center_Top_Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.14934, 0 )
+shape = SubResource( 16 )
+
+[node name="Center_Left_Area" type="Area" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.92581, 1, 1.64992 )
+input_ray_pickable = false
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="CameraManager/Center_Left_Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0984945, 0, -0.144363 )
+shape = SubResource( 17 )
+
+[node name="Center_Right_Area" type="Area" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.20516, 1, 2.722 )
+input_ray_pickable = false
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="CameraManager/Center_Right_Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.22937, -1.05302 )
+shape = SubResource( 18 )
+
+[node name="Camera_Transform" type="Spatial" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 0.960807, 0.277214, 0, -0.277214, 0.960808, 0, 6.7706, 21.2327 )
+
+[node name="Camera" type="Camera" parent="CameraManager/Camera_Transform"]
+
+[node name="Desk_Camera" type="Spatial" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 0.974433, 0.224679, 0, -0.224679, 0.974433, 0, 7.348, 20.114 )
+
+[node name="Bottom_Left_Camera" type="Spatial" parent="CameraManager"]
+transform = Transform( 0.993304, 0.0695256, -0.0922637, 0, 0.798636, 0.601815, 0.115527, -0.597785, 0.793288, -7.71856, 12.6545, 18.1869 )
+
+[node name="Bottom_Right_Camera" type="Spatial" parent="CameraManager"]
+transform = Transform( 0.993304, -0.0695257, 0.0922636, 0, 0.798636, 0.601815, -0.115527, -0.597786, 0.793288, 7.719, 12.654, 18 )
+
+[node name="Top_Left_Camera" type="Spatial" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 0.788171, 0.615455, 0, -0.615455, 0.788171, -7.86185, 12.0139, 8.80316 )
+
+[node name="Top_Right_Camera" type="Spatial" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 0.788171, 0.615455, 0, -0.615455, 0.788171, 7.862, 12.014, 8.803 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Top_Center_Camera" type="Spatial" parent="CameraManager"]
+transform = Transform( 1, 0, 0, 0, 0.788171, 0.615455, 0, -0.615455, 0.788171, 0, 12.014, 8.803 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Tween" type="Tween" parent="CameraManager"]
 [connection signal="book_placed" from="Desk" to="CustomerManager" method="_on_Desk_book_placed"]
+[connection signal="body_entered" from="CameraManager/Desk_Area" to="CameraManager" method="_on_Desk_Area_body_entered"]
+[connection signal="body_entered" from="CameraManager/Left_Bottom_Area" to="CameraManager" method="_on_Left_Bottom_Area_body_entered"]
+[connection signal="body_entered" from="CameraManager/Right_Bottom_Area" to="CameraManager" method="_on_Right_Bottom_Area_body_entered"]
+[connection signal="body_entered" from="CameraManager/Center_Top_Area" to="CameraManager" method="_on_Center_Top_Area_body_entered"]
+[connection signal="body_entered" from="CameraManager/Center_Left_Area" to="CameraManager" method="_on_Center_Left_Area_body_entered"]
+[connection signal="body_entered" from="CameraManager/Center_Right_Area" to="CameraManager" method="_on_Center_Right_Area_body_entered"]
 
 [editable path="CustomerManager"]
