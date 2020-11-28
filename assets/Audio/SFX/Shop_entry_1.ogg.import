@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Shop_entry_1.ogg-d31cdec41e62d46a52adf631088776cc.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

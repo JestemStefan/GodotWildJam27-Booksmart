@@ -37,6 +37,7 @@ func _ready() -> void:
 	self.connect("timer_up", GameState, "_timer_up")
 	timer.wait_time = round_time
 	timer.start()
+	if GameState.play_music: AudioManager.play_sound("game_music")
 
 
 

@@ -405,6 +405,7 @@ func book_to_shelf(book: Book, bookshelf):
 		book.desired_bookshelf = null
 		GameState.add_points(10)
 		bookshelf.stars()
+		AudioManager.play_sound("book_sparkle", false, bookshelf, "Effects")
 		bookshelf.enter_state(1) # 1 means taken
 		
 	else:

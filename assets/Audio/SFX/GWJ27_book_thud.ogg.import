@@ -11,5 +11,5 @@ dest_files=[ "res://.import/GWJ27_book_thud.ogg-c687cfda151da784e6d9b0dc6ef7284f
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

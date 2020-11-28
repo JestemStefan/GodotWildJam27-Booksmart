@@ -4,7 +4,12 @@ class_name Book
 var state: int
 enum State{FREE, ORDERED, RENTED, ORPHAN}
 
+var pre_orphan_state
+
+onready var orphan_timer:Timer = $Orphan_timer
 onready var library = get_tree().get_nodes_in_group("Library")[0]
+onready var barrel = get_tree().get_nodes_in_group("Barrel")[0]
+
 var desired_bookshelf: BookShelf
 
 const PATH = "res://models/books/"
@@ -16,6 +21,7 @@ var symbol : String = ["ninja", "knight", "wizard", "archer"][randi() % 4]
 onready var mesh := $MeshInstance
 onready var pickUpArea: Area = $Area
 onready var particles: Particles = $Particles
+onready var smoke: Particles = $Smoke
 
 
 func _ready() -> void:
@@ -29,6 +35,14 @@ func pick_up() -> void:
 	set_collision_mask(0)
 	set_collision_layer(0)
 	pickUpArea.set_collision_layer(0)
+	
+	orphan_timer.stop()
+	
+	match state:
+		State.ORPHAN:
+			enter_state(pre_orphan_state)
+			remove_from_group("Orphans")
+			barrel.remove_victim(self)
 
 
 func throw() -> void:
@@ -36,6 +50,13 @@ func throw() -> void:
 	set_collision_mask(15)
 	set_collision_layer(2)
 	pickUpArea.set_collision_layer(8)
+	
+	match state:
+		State.FREE:
+			orphan_timer.start(5)
+		
+		State.RENTED:
+			orphan_timer.start(5)
 
 
 func place() -> void:
@@ -92,6 +113,22 @@ func set_desired_bookshelf():
 func enable_particles(on_off: bool):
 	particles.set_emitting(on_off)
 
+func smoke():
+	smoke.set_emitting(true)
+
 
 func enter_state(new_state):
 	state = new_state
+
+
+func _on_Orphan_timer_timeout():
+	match state:
+		State.FREE:
+			pre_orphan_state = state
+			enter_state(State.ORPHAN)
+			add_to_group("Orphans")
+		
+		State.RENTED:
+			pre_orphan_state = state
+			enter_state(State.ORPHAN)
+			add_to_group("Orphans")
